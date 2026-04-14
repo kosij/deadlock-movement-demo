@@ -1,7 +1,7 @@
 # Deadlock Movement System
 > This project aims to replace the standard Facepunch PlayerController with a from-scratch C# implementation to mimic the momentum-based mechanics found in *Deadlock*.
 
-## Current Status: Setting Up
+## Current Status: Implementing Core Mechanics
 - [x] CharacterController Integration
 - [x] Camera-relative WishDir Projection
 - [x] Air Strafe Physics
