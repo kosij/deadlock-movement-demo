@@ -835,6 +835,8 @@
           "__guid": "a9491496-2c3b-408d-a5fa-830ce53030e7",
           "__enabled": true,
           "Flags": 0,
+          "Gravity": 800,
+          "JumpForce": 300,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -842,6 +844,26 @@
           "OnComponentStart": null,
           "OnComponentUpdate": null,
           "Speed": 300
+        },
+        {
+          "__type": "Sandbox.CharacterController",
+          "__guid": "5789ee3a-2c09-4b6f-81a1-6cc8d5abccbf",
+          "__enabled": true,
+          "Flags": 0,
+          "Acceleration": 10,
+          "Bounciness": 0.3,
+          "GroundAngle": 45,
+          "Height": 64,
+          "IgnoreLayers": "",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Radius": 16,
+          "StepHeight": 18,
+          "UseCollisionRules": false
         }
       ],
       "Children": [
@@ -909,7 +931,7 @@
           ],
           "Children": [
             {
-              "__guid": "32489388-78f6-4e43-bea0-c95c3a683ebe",
+              "__guid": "534274ce-dc60-4b5b-8c51-b10424e3c642",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - eyebrows",
@@ -926,7 +948,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "c1589da5-f640-418e-a1ce-9be331dee24f",
+                  "__guid": "50a23449-0303-48b5-8da6-681c1fb7e232",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -978,7 +1000,7 @@
               "Children": []
             },
             {
-              "__guid": "d8d28c39-31f3-41df-970b-7c8565cb9e57",
+              "__guid": "03c3a3c0-c254-40d0-9023-cc363f13b4ca",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - hair_long_dreadlocks",
@@ -995,7 +1017,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "57ddc443-4869-471b-a407-7322b9958142",
+                  "__guid": "8e4bff24-8670-46be-8750-89b66bef30be",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -1047,7 +1069,7 @@
               "Children": []
             },
             {
-              "__guid": "66955842-c2a5-40fd-abaf-973cf77b6523",
+              "__guid": "498a5061-617c-4c27-bc93-fd223d1a5a70",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - football_tshirt",
@@ -1064,7 +1086,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "e153827f-7355-4840-8cf8-34ac0f0bb0c5",
+                  "__guid": "dbb75aba-1416-44b6-a0f3-4c8c1f2d7433",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -1116,7 +1138,7 @@
               "Children": []
             },
             {
-              "__guid": "63d84a2f-9c0d-4b7a-a326-5abe608811a3",
+              "__guid": "ca747fef-26cd-42db-a6de-aa299e163f0b",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - slippers",
@@ -1133,7 +1155,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "9bc8030f-b071-4c24-aa45-bce8a4adfe9f",
+                  "__guid": "ed9db3f2-647b-4efc-8866-e84b3f268d72",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -1185,7 +1207,7 @@
               "Children": []
             },
             {
-              "__guid": "6e08657a-4249-41c0-914d-58eb7a85b357",
+              "__guid": "2a861546-eae1-4ff4-9b99-9920902a2768",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - boxing_shorts_red",
@@ -1202,7 +1224,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "7dd02779-0027-4e78-9672-97c0b8900a0c",
+                  "__guid": "1665e293-ad35-41c0-abd5-eb328ed3e5a0",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -1356,7 +1378,7 @@
       },
       "Sandbox.Clutter.ClutterGridSystem": {
         "Storage": {
-          "$blob": "f04cf431-a635-4fba-b091-7943b51a137e"
+          "$blob": "7d1e632a-79a5-4b3f-9cac-406db23e3063"
         }
       }
     }
