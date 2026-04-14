@@ -642,7 +642,7 @@
       "__version": 2,
       "Flags": 0,
       "Name": "Player Controller",
-      "Position": "-126.4293,-187.5311,115.5769",
+      "Position": "-126.4293,-187.5311,388.2741",
       "Rotation": "0,0,0,1",
       "Scale": "1,1,1",
       "Tags": "",
@@ -836,14 +836,14 @@
           "__enabled": true,
           "Flags": 0,
           "Gravity": 800,
-          "JumpForce": 300,
+          "JumpForce": 287,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
           "OnComponentFixedUpdate": null,
           "OnComponentStart": null,
           "OnComponentUpdate": null,
-          "Speed": 300
+          "Speed": 319
         },
         {
           "__type": "Sandbox.CharacterController",
@@ -1378,7 +1378,7 @@
       },
       "Sandbox.Clutter.ClutterGridSystem": {
         "Storage": {
-          "$blob": "7d1e632a-79a5-4b3f-9cac-406db23e3063"
+          "$blob": "ee1ae102-ea37-4bb8-8085-cf7ce81ecb2f"
         }
       }
     }
