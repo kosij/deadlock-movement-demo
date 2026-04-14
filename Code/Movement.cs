@@ -3,7 +3,6 @@ using System;
 
 public sealed class Movement : Component
 {
-    // These show up in your Inspector so you can tweak them without code
     [Property] public float Speed { get; set; } = 300f;
     [Property] public float Gravity { get; set; } = 800f;
     [Property] public float JumpForce { get; set; } = 300f;
@@ -12,14 +11,13 @@ public sealed class Movement : Component
     [Property] public float AirSpeed { get; set; } = 30f;
     [Property] public float AirAcceleration { get; set; } = 100f;
 
-    // This is the "Physics" part we talked about
     [RequireComponent] public CharacterController Controller { get; set; }
 
     protected override void OnUpdate()
     {
         // input direction
         Vector3 wishDir = Input.AnalogMove;
-
+        
         // make direction relative to camera
         wishDir *= Scene.Camera.WorldRotation;
 
