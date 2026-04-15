@@ -2,6 +2,17 @@
 
 ---
 
+## [April 15, 2026] - Architecture Refactor: Finite State Machine
+
+Before adding movement like sliding and dashing, I refactored the movement controller into a finite state machine to make the code easier to work with and more scalable.
+
+**Architecture Updates:**
+*   **The Manager Pattern:** Removed the physics maths from `movement.cs`. Now it acts as a state manager and holds global values for the movement states.
+*   **State Encapsulation:** Made a `BaseState` and moved the grounded and airborne logic into `GroundedState.cs` and `AirborneState.cs`.
+*   **Lifecycle Safety:** Implemented `Enter()` and `Exit()` methodology on the State transitions. For safety, only the manager can call these methods ( if i relied on the state to call its own Exit() method, I might forget to write it and cause a memory leak ).
+
+---
+
 ## [April 14, 2026] - Feature: Recreating Deadlock's Momentum Physics
 
 I implemented the core physics loop for the movement system, using manual physics instead of the engine's for more control.
