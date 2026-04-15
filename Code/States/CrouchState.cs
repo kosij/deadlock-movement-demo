@@ -46,7 +46,9 @@ public class CrouchState : BaseState
         // un-crouch
         if ( !Input.Down( "crouch" ) ) return new GroundedState( Manager );
 
+        
         // stay in Crouch State
+        this.WishDir = wishDir;
         return null;
     }
 

@@ -1,5 +1,6 @@
 using Sandbox;
 using System;
+using Sandbox.Citizen;
 
 public sealed class Movement : Component
 {
@@ -15,6 +16,7 @@ public sealed class Movement : Component
     [Property] public float CrouchSpeed { get; set; } = 100f;
 
 
+    [RequireComponent] public CitizenAnimationHelper Animator { get; set; }
     [RequireComponent] public CharacterController Controller { get; set; }
     public BaseState CurrentState { get; private set; }
 
@@ -36,8 +38,28 @@ public sealed class Movement : Component
         }
 
         // rotate player with camera
-        Transform.Rotation = Rotation.FromYaw( Scene.Camera.WorldRotation.Angles().yaw );
+        WorldRotation = Rotation.FromYaw( Scene.Camera.WorldRotation.Angles().yaw );
 
         Controller.Move();
+        UpdateAnimations();
     }
+
+    private void UpdateAnimations()
+    {
+        if ( Animator == null ) return;
+
+        Animator.WithVelocity( Controller.Velocity );
+        Animator.WithWishVelocity( CurrentState.WishDir );
+        Animator.IsGrounded = Controller.IsOnGround;
+
+        if ( CurrentState is CrouchState || CurrentState is SlideState ) 
+        {
+            Animator.DuckLevel = 1f;
+        }
+        else 
+        {
+            Animator.DuckLevel = 0f;
+        }
+    }
+
 }

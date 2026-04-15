@@ -29,13 +29,16 @@ public class AirborneState : BaseState
 
         Manager.Controller.Velocity = targetVelocity;
 
-        // if we touch the ground transtion to GroundedState
+        // --- transitions ---
+
+        // landed
         if ( Manager.Controller.IsOnGround )
         {
             return new GroundedState( Manager );
         }
 
-        // Keep flying
+        // stay airborne
+        this.WishDir = wishDir;
         return null;
     }
 }

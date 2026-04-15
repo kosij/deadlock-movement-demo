@@ -60,7 +60,8 @@ public class GroundedState : BaseState
             return new AirborneState( Manager );
         }
 
-        // otherwise nothing changes
+        // stay standing
+        this.WishDir = wishDir;
         return null;
     }
 }

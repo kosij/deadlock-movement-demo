@@ -9,6 +9,8 @@ public abstract class BaseState
         Manager = manager;
     }
 
+    public Vector3 WishDir { get; protected set; }
+
     public virtual void Enter() { }
 
     public abstract BaseState Update();

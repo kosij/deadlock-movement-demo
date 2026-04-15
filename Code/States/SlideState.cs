@@ -48,6 +48,7 @@ public class SlideState : BaseState
         if ( targetVelocity.Length < Manager.CrouchSpeed ) return new CrouchState( Manager );
 
         // stay in Slide State
+        this.WishDir = wishDir;
         return null;
     }
 
