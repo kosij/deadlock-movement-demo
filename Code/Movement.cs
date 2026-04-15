@@ -12,65 +12,27 @@ public sealed class Movement : Component
     [Property] public float AirAcceleration { get; set; } = 100f;
 
     [RequireComponent] public CharacterController Controller { get; set; }
+    public BaseState CurrentState { get; private set; }
+
+    protected override void OnStart()
+    {
+        CurrentState = new AirborneState( this );
+        CurrentState.Enter();
+    }
 
     protected override void OnUpdate()
     {
-        // input direction
-        Vector3 wishDir = Input.AnalogMove;
-        
-        // make direction relative to camera
-        wishDir *= Scene.Camera.WorldRotation;
+        BaseState nextState = CurrentState.Update();
 
-        wishDir.z = 0;
-
-        // inherit momentum from last frame
-        Vector3 targetVelocity = Controller.Velocity;
-
-        if ( Controller.IsOnGround )
+        if ( nextState != null )
         {
-            // apply friciton
-            targetVelocity = Vector3.Lerp( targetVelocity, Vector3.Zero, GroundFriction * Time.Delta );
-
-            // calculate speed dot product and budget
-            float currentSpeed = Vector3.Dot( targetVelocity, wishDir );
-            float speedBudget = Speed - currentSpeed;
-
-            if ( speedBudget > 0 )
-            {
-                // calculate accel and clamp it
-                float accelAmount = Math.Min( GroundAcceleration * Speed * Time.Delta, speedBudget );
-                targetVelocity += wishDir * accelAmount;
-            }
-
-            // zero out gravity while grounded
-            targetVelocity.z = 0;
+            CurrentState.Exit();
+            CurrentState = nextState;
+            CurrentState.Enter();
         }
-        else
-        {
-            // calculate speed dot product and budget
-            float currentSpeed = Vector3.Dot( targetVelocity, wishDir );
-            float speedBudget = Speed - currentSpeed;
-
-            if ( speedBudget > 0 )
-            {
-                float accelAmount = Math.Min( AirAcceleration * AirSpeed * Time.Delta, speedBudget );
-                targetVelocity += wishDir * accelAmount;
-            }
-
-            // add gravity
-            targetVelocity.z -= Gravity * Time.Delta;
-        }
-
-        Controller.Velocity = targetVelocity;
 
         // rotate player with camera
         Transform.Rotation = Rotation.FromYaw( Scene.Camera.WorldRotation.Angles().yaw );
-
-        // jump
-        if ( Controller.IsOnGround && Input.Pressed( "jump" ) )
-        {
-            Controller.Punch( Vector3.Up * JumpForce );
-        }
 
         Controller.Move();
     }
