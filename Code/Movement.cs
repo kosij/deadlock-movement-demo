@@ -10,6 +10,10 @@ public sealed class Movement : Component
     [Property] public float GroundAcceleration { get; set; } = 10f;
     [Property] public float AirSpeed { get; set; } = 30f;
     [Property] public float AirAcceleration { get; set; } = 100f;
+    [Property] public float SlideFriction { get; set; } = 0.5f;
+    [Property] public float MinSlideSpeed { get; set; } = 150f;
+    [Property] public float CrouchSpeed { get; set; } = 100f;
+
 
     [RequireComponent] public CharacterController Controller { get; set; }
     public BaseState CurrentState { get; private set; }

@@ -13,7 +13,6 @@ public class GroundedState : BaseState
         wishDir.z = 0;
         Vector3 targetVelocity = Manager.Controller.Velocity;
 
-
         // apply friciton
         targetVelocity = Vector3.Lerp( targetVelocity, Vector3.Zero, Manager.GroundFriction * Time.Delta );
 
@@ -33,9 +32,26 @@ public class GroundedState : BaseState
 
         Manager.Controller.Velocity = targetVelocity;
 
+
+        // --- transitions ---
+        // jump
         if ( Input.Pressed( "jump" ) )
         {
             Manager.Controller.Punch( Vector3.Up * Manager.JumpForce );
+        }
+        // crouch held down
+        if ( Input.Down( "crouch" ) )
+        {
+            // fast enough -> slide
+            if ( Manager.Controller.Velocity.Length > Manager.MinSlideSpeed)
+            {
+                return new SlideState( Manager );
+            }
+            // crouch walk
+            else
+            {
+                return new CrouchState( Manager );
+            }
         }
 
         // if no longer on the ground transition to AirborneState

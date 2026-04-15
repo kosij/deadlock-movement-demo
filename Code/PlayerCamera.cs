@@ -23,7 +23,9 @@ public sealed class PlayerCamera : Component
         Scene.Camera.WorldRotation = EyeAngles.ToRotation();
 
         // set the camera offset from the player
-        Vector3 centerPosition = Target.Transform.Position + Vector3.Up * TargetHeight;
+        CharacterController controller = Target.Components.Get<CharacterController>();
+        float currentTargetHeight = controller != null ? (controller.Height * 0.9f) : 64f;
+        Vector3 centerPosition = Target.Transform.Position + Vector3.Up * currentTargetHeight;
         Vector3 offset = Scene.Camera.WorldRotation.Backward * Distance;
 
         // apply position to scene camera
