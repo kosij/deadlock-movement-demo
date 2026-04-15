@@ -15,7 +15,7 @@
 
 > **Media:**
 
-`testing Yamato's movement velocities in Deadlock`
+`testing Yamato's movement velocities in and figuring out the min speed to slide in Deadlock`
 
 https://github.com/user-attachments/assets/41eec0da-ea96-4672-8880-3a48ad2df821
 
