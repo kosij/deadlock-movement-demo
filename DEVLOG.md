@@ -2,6 +2,26 @@
 
 ---
 
+## [April 15, 2026] - Feature: Slide Kinematics & Animation Blending
+
+**Features Implemented:**
+*   Created `SlideState` and `CrouchState` utilizing the FSM architecture.
+*   Added dynamic camera scaling to map the camera height to player "eye-line".
+*   Bridged the movement state machine to the CitizenAnimationHelper component. The states are much easier to read when animated.
+
+**Key Learnings & Takeaways:**
+*   **Character Choice:** After testing the Deadlock characters, I've decided to model my movement values based on Yamato because they are one of the few characters fast enough to transition directly from running into sliding.
+*   **De-coupling Visuals from Physics:** By decoupling the animations from the the physics state machine, I'm avoiding calculating graphics inside the physics system.
+
+> 📷 **Media:**
+[testing Yamato's movement velocities in Deadlock](https://outplayed.tv/media/7L2kzZ)
+
+It seems like Yamato's slide has more directional control than my demo. I also think it takes longer to reach top speed on Yamato than in my demo. (It is difficult to tell so I will work on adding a state and velocity indicator to my demo)
+![yamato slide control](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDkxOGdqZDc1bW5pc2dxbXFxcWVqOG91M2V5Mjhramh4bWJ3MWZiaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/5EKUZYYlLaNJPsV8ha/giphy.gif)
+![my demo](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmlqNWh4dHl6Y2xmczVybm51dmJwaTJ1ZnE2aGh6dzhud2hnODc4YSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XQnm642yJ2ZNtE69D4/giphy.gif)
+
+---
+
 ## [April 15, 2026] - Architecture Refactor: Finite State Machine
 
 Before adding movement like sliding and dashing, I refactored the movement controller into a finite state machine to make the code easier to work with and more scalable.
