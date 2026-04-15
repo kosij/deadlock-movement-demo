@@ -153,7 +153,7 @@
       "Name": "Plane",
       "Position": "0,0,0",
       "Rotation": "0,0,0,1",
-      "Scale": "5,5,5",
+      "Scale": "25,25,5",
       "Tags": "",
       "Enabled": true,
       "NetworkMode": 2,
@@ -171,7 +171,7 @@
           "CreateAttachments": false,
           "LodOverride": null,
           "MaterialGroup": null,
-          "MaterialOverride": "materials/default.vmat",
+          "MaterialOverride": "materials/dev/gray_grid_8.vmat",
           "Materials": null,
           "Model": "models/dev/plane.vmdl",
           "OnComponentDestroy": null,
@@ -187,7 +187,7 @@
             "AfterUILayer": false
           },
           "RenderType": "On",
-          "Tint": "0.39546,0.51163,0.27128,1"
+          "Tint": "0.64459,0.79898,0.88837,1"
         },
         {
           "__type": "Sandbox.BoxCollider",
@@ -835,7 +835,11 @@
           "__guid": "a9491496-2c3b-408d-a5fa-830ce53030e7",
           "__enabled": true,
           "Flags": 0,
+          "AirAcceleration": 100,
+          "AirSpeed": 30,
           "Gravity": 800,
+          "GroundAcceleration": 10,
+          "GroundFriction": 4,
           "JumpForce": 287,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
@@ -850,7 +854,7 @@
           "__guid": "5789ee3a-2c09-4b6f-81a1-6cc8d5abccbf",
           "__enabled": true,
           "Flags": 0,
-          "Acceleration": 10,
+          "Acceleration": 0,
           "Bounciness": 0.3,
           "GroundAngle": 45,
           "Height": 64,
@@ -864,6 +868,24 @@
           "Radius": 16,
           "StepHeight": 18,
           "UseCollisionRules": false
+        },
+        {
+          "__type": "PlayerCamera",
+          "__guid": "b6b46780-db82-4208-bc39-13273defcf5b",
+          "__enabled": true,
+          "Flags": 0,
+          "Distance": 250,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Target": {
+            "_type": "gameobject",
+            "go": "4cc82759-99f8-49c7-8ebf-dfe7a5bbca82"
+          },
+          "TargetHeight": 64
         }
       ],
       "Children": [
@@ -1378,7 +1400,7 @@
       },
       "Sandbox.Clutter.ClutterGridSystem": {
         "Storage": {
-          "$blob": "ee1ae102-ea37-4bb8-8085-cf7ce81ecb2f"
+          "$blob": "348eaf8e-61a2-4767-b2ab-2f298b575634"
         }
       }
     }
