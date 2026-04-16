@@ -14,6 +14,8 @@ public sealed class Movement : Component
     [Property] public float SlideFriction { get; set; } = 0.5f;
     [Property] public float MinSlideSpeed { get; set; } = 150f;
     [Property] public float CrouchSpeed { get; set; } = 100f;
+    [Property] public float SlideSpeed { get; set; } = 50f;
+    [Property] public float SlideAcceleration { get; set; } = 50f;
 
 
     [RequireComponent] public CitizenAnimationHelper Animator { get; set; }

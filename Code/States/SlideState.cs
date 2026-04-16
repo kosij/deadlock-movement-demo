@@ -23,6 +23,16 @@ public class SlideState : BaseState
         // apply friciton
         targetVelocity = Vector3.Lerp( targetVelocity, Vector3.Zero, Manager.SlideFriction * Time.Delta );
 
+        // calculate speed dot product and budget
+        float currentSpeed = Vector3.Dot( targetVelocity, wishDir );
+        float speedBudget = Manager.SlideSpeed - currentSpeed;
+
+        if ( speedBudget > 0 )
+        {
+            float accelAmount = Math.Min( Manager.SlideAcceleration * Manager.SlideSpeed * Time.Delta, speedBudget );
+            targetVelocity += wishDir * accelAmount;
+        }
+
         // zero out gravity
         targetVelocity.z = 0;        
 
