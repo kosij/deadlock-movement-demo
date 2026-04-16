@@ -19,14 +19,17 @@
 
 https://github.com/user-attachments/assets/41eec0da-ea96-4672-8880-3a48ad2df821
 
+After testing, I figured out the minimum speed required to slide is ~350 units of velocity
+
 
 `yamato's slide control`
 
 https://github.com/user-attachments/assets/6dfa4232-a540-4dbe-a9bc-33daccef1615
 
-It seems like Yamato's slide has more directional control than my demo. I also think it takes longer to reach top speed on Yamato than in my demo. (It is difficult to tell so I will work on adding a state and velocity indicator to my demo)
+It seems like Yamato's slide has more directional control than my demo. I also think it takes longer to reach top speed on Yamato than in my demo. (It is difficult to tell so I will work on adding a state and velocity indicator to my demo).
 
-`my demo `
+
+`my demo (I don't have a slide animation yet)`
 
 <img width="426" height="240" alt="Video Project" src="https://github.com/user-attachments/assets/43eca47e-df84-408a-8f35-deee4669c296" />
 
