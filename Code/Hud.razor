@@ -1,0 +1,146 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System;
+@inherits PanelComponent
+
+<root>
+    <div class="hud-container">
+        <label class="title">movement telementary</label>
+        
+        @if (PlayerTracker == null)
+        {
+            <label class="error">movement component not linked</label>
+        }
+        else
+        {
+            <div class="row">
+                <span class="label">State:</span>
+                <span class="value">@PlayerTracker.CurrentState?.GetType().Name</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Absolute SPD:</span>
+                <span class="value">@(MathF.Round(AbsSpeed))</span>
+                <span class="peak">(Peak: @(MathF.Round(PeakAbs.Value)))</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Forward (X):</span>
+                <span class="value">@(MathF.Round(RelativeVel.x))</span>
+                <span class="peak">(Peak: @(MathF.Round(PeakX.Value)))</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Lateral (Y):</span>
+                <span class="value">@(MathF.Round(RelativeVel.y))</span>
+                <span class="peak">(Peak: @(MathF.Round(PeakY.Value)))</span>
+            </div>
+            
+            <div class="row">
+                <span class="label">Vertical (Z):</span>
+                <span class="value">@(MathF.Round(RelativeVel.z))</span>
+                <span class="peak">(Peak: @(MathF.Round(PeakZ.Value)))</span>
+            </div>
+        }
+    </div>
+</root>
+
+@code
+{
+    [Property] public global::Movement PlayerTracker { get; set; }
+
+    public struct PeakTracker
+    {
+        public float Value;
+        public float TimeSet;
+
+        public void Update(float current)
+        {
+            // if our velocity is higher or 2 seconds have passed, update our peak velocity value
+            if (MathF.Abs(current) > MathF.Abs(Value) || Time.Now - TimeSet > 2f)
+            {
+                Value = current;
+                TimeSet = Time.Now;
+            }
+        }
+    }
+
+    private PeakTracker PeakAbs;
+    private PeakTracker PeakX;
+    private PeakTracker PeakY;
+    private PeakTracker PeakZ;
+
+    private float AbsSpeed;
+    private Vector3 RelativeVel;
+
+    protected override void OnUpdate()
+    {
+        if (PlayerTracker == null || PlayerTracker.Controller == null) return;
+
+        // calculate absolute velocity
+        AbsSpeed = PlayerTracker.Controller.Velocity.WithZ(0).Length;
+        PeakAbs.Update(AbsSpeed);
+
+        // making our x and y readings relative to the camera direction
+        Rotation camYaw = Rotation.FromYaw(PlayerTracker.Scene.Camera.WorldRotation.Angles().yaw);
+        RelativeVel = PlayerTracker.Controller.Velocity * camYaw.Inverse;
+
+        PeakX.Update(RelativeVel.x);
+        PeakY.Update(RelativeVel.y);
+        PeakZ.Update(RelativeVel.z);
+    }
+
+    protected override int BuildHash()
+    {
+        // make ui update every frame
+        return HashCode.Combine( Time.Now );
+    }
+}
+
+<style>
+    .hud-container {
+        position: absolute;
+        bottom: 50px;
+        left: 50px;
+        flex-direction: column;
+        color: white;
+        font-family: Consolas, monospace;
+        font-size: 20px;
+        text-shadow: 2px 2px 0px black;
+        background-color: rgba(0, 0, 0, 0.4);
+        padding: 15px;
+        border-radius: 8px;
+    }
+    
+    .title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #ffcc00;
+        margin-bottom: 15px;
+    }
+
+    .error {
+        color: #ff4444;
+    }
+
+    .row {
+        margin-bottom: 5px;
+        flex-direction: row;
+        width: 400px;
+    }
+
+    .label {
+        color: #cccccc;
+        width: 175px;
+    }
+
+    .value {
+        width: 60px;
+        font-weight: bold;
+    }
+
+    .peak {
+        color: #888888;
+        font-size: 16px;
+    }
+</style>
