@@ -741,12 +741,12 @@
           "Flags": 0,
           "AirAcceleration": 100,
           "AirSpeed": 30,
-          "CrouchSpeed": 100,
+          "CrouchSpeed": 187,
           "Gravity": 800,
           "GroundAcceleration": 10,
           "GroundFriction": 4,
-          "JumpForce": 300,
-          "MinSlideSpeed": 150,
+          "JumpForce": 287,
+          "MinSlideSpeed": 350,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -754,7 +754,7 @@
           "OnComponentStart": null,
           "OnComponentUpdate": null,
           "SlideFriction": 0.5,
-          "Speed": 300
+          "Speed": 386
         },
         {
           "__type": "Sandbox.Citizen.CitizenAnimationHelper",
