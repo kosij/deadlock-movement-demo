@@ -66,6 +66,6 @@ public class SlideState : BaseState
     public override void Exit()
     {
         // restore height (stand up)
-        Manager.Controller.Height = 72f;
+        Manager.Controller.Height = 64f;
     }
 }

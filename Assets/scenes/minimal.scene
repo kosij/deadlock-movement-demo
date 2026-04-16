@@ -753,7 +753,9 @@
           "OnComponentFixedUpdate": null,
           "OnComponentStart": null,
           "OnComponentUpdate": null,
+          "SlideAcceleration": 50,
           "SlideFriction": 0.5,
+          "SlideSpeed": 50,
           "Speed": 386
         },
         {
