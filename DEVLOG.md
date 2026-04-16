@@ -2,7 +2,22 @@
 
 ---
 
-## [April 15, 2026] - Feature: Slide Kinematics & Animation Blending
+## 4 [April 16, 2026] - Feature: Telemetry HUD & Slide Kinematics
+
+**Features Implemented:**
+*   **Real-time Telemetry HUD:** Built a custom UI overlay using Razor to track absolute velocity and xyz velocities relative to the camera. Added a rolling 2-second peak velocity measurement to read the speed limits easier.
+*   **Slide Steering:** I added the same style acceleration and speed mechanics to the slide as other states to allow for steering while sliding
+
+**Key Learnings & Takeaways:**
+*   **Vector Normalisation:** When I stripped the z-axis from my input vector (`wishDir.z = 0`), I was shrinking the vector's absolute length whenever the camera was pitched up or down or when moving diagonally. I used `wishDir = wishDir.Normal` to normalise my wish vector and make my movement the same in every direction.
+*   **Hidden Dependency Error:** I ran into an issue where the s&box Editor refused to compile when I removed the native 'Player Controller' component because the player prefab I was using seemed to have a hidden dependency on it. I first attempted to fix the problem by clearing the engine cache, but finally resolved the issue by migrating all my custom components to an empty game object.
+
+> **Media:**
+
+
+---
+
+## 3 [April 15, 2026] - Feature: Slide Kinematics & Animation Blending
 
 **Features Implemented:**
 *   Created `SlideState` and `CrouchState` utilizing the FSM architecture.
@@ -35,7 +50,7 @@ It seems like Yamato's slide has more directional control than my demo. I also t
 
 ---
 
-## [April 15, 2026] - Architecture Refactor: Finite State Machine
+## 2 [April 15, 2026] - Architecture Refactor: Finite State Machine
 
 Before adding movement like sliding and dashing, I refactored the movement controller into a finite state machine to make the code easier to work with and more scalable.
 
@@ -46,7 +61,7 @@ Before adding movement like sliding and dashing, I refactored the movement contr
 
 ---
 
-## [April 14, 2026] - Feature: Recreating Deadlock's Momentum Physics
+## 1 [April 14, 2026] - Feature: Recreating Deadlock's Momentum Physics
 
 I implemented the core physics loop for the movement system, using manual physics instead of the engine's for more control.
 
