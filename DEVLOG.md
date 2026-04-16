@@ -46,7 +46,7 @@ The hud lets us know we are sliding, but I need to add a slide animation so I ca
 
 https://github.com/user-attachments/assets/eff8b332-e15c-4f35-b759-0b97d4da9449
 
-This is an unintended interaction. I will need to tweak some physics values or clamp the turning speed another way.
+This is an unintended mechanic. I will need to tweak some physics values or clamp the turning speed another way.
 
 <br><br>
 
