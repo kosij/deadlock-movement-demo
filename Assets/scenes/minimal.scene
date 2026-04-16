@@ -32,8 +32,31 @@
           "Opacity": 1,
           "Scale": 1,
           "ScaleStrategy": "ConsistentHeight",
-          "TargetCamera": null,
+          "TargetCamera": {
+            "_type": "component",
+            "component_id": "cf3cbf96-22b6-4be4-a5d0-672a96c17f9f",
+            "go": "3ee1c9f4-07be-4e0b-8b23-67bee2d8ec8a",
+            "component_type": "CameraComponent"
+          },
           "ZIndex": 100
+        },
+        {
+          "__type": "Sandbox.Hud",
+          "__guid": "77759477-66bf-4ac0-8ffb-8cfaa4999350",
+          "__enabled": true,
+          "Flags": 0,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "PlayerTracker": {
+            "_type": "component",
+            "component_id": "9858c562-4a25-417a-9d30-2d2e7069300e",
+            "go": "ced3bfdf-a979-4bcc-bde4-927da52b92e1",
+            "component_type": "Movement"
+          }
         }
       ],
       "Children": []
@@ -675,11 +698,11 @@
       "Children": []
     },
     {
-      "__guid": "4cc82759-99f8-49c7-8ebf-dfe7a5bbca82",
+      "__guid": "ced3bfdf-a979-4bcc-bde4-927da52b92e1",
       "__version": 2,
       "Flags": 0,
-      "Name": "Player Controller",
-      "Position": "-126.429298,-187.531097,388.274109",
+      "Name": "Player",
+      "Position": "-126.429306,-187.531067,115.576904",
       "Rotation": "0,0,0,1",
       "Scale": "1,1,1",
       "Tags": "",
@@ -692,16 +715,11 @@
       "Components": [
         {
           "__type": "Sandbox.Dresser",
-          "__guid": "71232d52-1eb4-48c2-9d65-e79c8293275b",
+          "__guid": "ac9c17b5-c789-43f0-958d-eae9d758f6dc",
           "__enabled": true,
           "Flags": 0,
           "ApplyHeightScale": true,
-          "BodyTarget": {
-            "_type": "component",
-            "component_id": "6ef5433f-3f88-4a93-96ed-a0dcb82f758b",
-            "go": "a103cefe-1a0e-47d5-9b36-48167b559dee",
-            "component_type": "SkinnedModelRenderer"
-          },
+          "BodyTarget": null,
           "Clothing": [],
           "ManualAge": 0,
           "ManualHeight": 1,
@@ -718,17 +736,17 @@
         },
         {
           "__type": "Movement",
-          "__guid": "a9491496-2c3b-408d-a5fa-830ce53030e7",
+          "__guid": "9858c562-4a25-417a-9d30-2d2e7069300e",
           "__enabled": true,
           "Flags": 0,
           "AirAcceleration": 100,
           "AirSpeed": 30,
-          "CrouchSpeed": 187,
+          "CrouchSpeed": 100,
           "Gravity": 800,
           "GroundAcceleration": 10,
           "GroundFriction": 4,
-          "JumpForce": 287,
-          "MinSlideSpeed": 350,
+          "JumpForce": 300,
+          "MinSlideSpeed": 150,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -736,53 +754,18 @@
           "OnComponentStart": null,
           "OnComponentUpdate": null,
           "SlideFriction": 0.5,
-          "Speed": 386
-        },
-        {
-          "__type": "Sandbox.CharacterController",
-          "__guid": "5789ee3a-2c09-4b6f-81a1-6cc8d5abccbf",
-          "__enabled": true,
-          "Flags": 0,
-          "Acceleration": 0,
-          "Bounciness": 0.3,
-          "GroundAngle": 45,
-          "Height": 64,
-          "IgnoreLayers": "",
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null,
-          "Radius": 16,
-          "StepHeight": 18,
-          "UseCollisionRules": false
-        },
-        {
-          "__type": "PlayerCamera",
-          "__guid": "b6b46780-db82-4208-bc39-13273defcf5b",
-          "__enabled": true,
-          "Flags": 0,
-          "Distance": 250,
-          "OnComponentDestroy": null,
-          "OnComponentDisabled": null,
-          "OnComponentEnabled": null,
-          "OnComponentFixedUpdate": null,
-          "OnComponentStart": null,
-          "OnComponentUpdate": null,
-          "Target": {
-            "_type": "gameobject",
-            "go": "4cc82759-99f8-49c7-8ebf-dfe7a5bbca82"
-          },
-          "TargetHeight": 64
+          "Speed": 300
         },
         {
           "__type": "Sandbox.Citizen.CitizenAnimationHelper",
-          "__guid": "bc962d2e-3967-441e-8938-745d33ca2f63",
+          "__guid": "5557ae11-fa7b-44f4-b02b-394acb6c2502",
           "__enabled": true,
           "Flags": 0,
           "BodyWeight": 1,
-          "EyeSource": null,
+          "EyeSource": {
+            "_type": "gameobject",
+            "go": "3ee1c9f4-07be-4e0b-8b23-67bee2d8ec8a"
+          },
           "EyesWeight": 1,
           "HeadWeight": 1,
           "Height": null,
@@ -800,19 +783,57 @@
           "OnComponentUpdate": null,
           "Target": {
             "_type": "component",
-            "component_id": "6ef5433f-3f88-4a93-96ed-a0dcb82f758b",
-            "go": "a103cefe-1a0e-47d5-9b36-48167b559dee",
+            "component_id": "ce26765d-306a-4081-beb2-3fbbdb403793",
+            "go": "ee2b64ee-4ea4-42f7-9346-8f5ed3b5afe1",
             "component_type": "SkinnedModelRenderer"
           }
+        },
+        {
+          "__type": "Sandbox.CharacterController",
+          "__guid": "32903392-31fc-4264-b927-a712f969def6",
+          "__enabled": true,
+          "Flags": 0,
+          "Acceleration": 10,
+          "Bounciness": 0.3,
+          "GroundAngle": 45,
+          "Height": 64,
+          "IgnoreLayers": "",
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Radius": 16,
+          "StepHeight": 18,
+          "UseCollisionRules": false
+        },
+        {
+          "__type": "PlayerCamera",
+          "__guid": "44d3c163-d620-4cb6-bd7b-271f6b8f9d8e",
+          "__enabled": true,
+          "Flags": 0,
+          "Distance": 250,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "Target": {
+            "_type": "gameobject",
+            "go": "ced3bfdf-a979-4bcc-bde4-927da52b92e1"
+          },
+          "TargetHeight": 64
         }
       ],
       "Children": [
         {
-          "__guid": "a103cefe-1a0e-47d5-9b36-48167b559dee",
+          "__guid": "ee2b64ee-4ea4-42f7-9346-8f5ed3b5afe1",
           "__version": 2,
           "Flags": 0,
           "Name": "Body",
-          "Position": "0,0,0",
+          "Position": "7.62939453E-06,-3.05175781E-05,0",
           "Rotation": "0,0,0,1",
           "Scale": "1,1,1",
           "Tags": "",
@@ -825,7 +846,7 @@
           "Components": [
             {
               "__type": "Sandbox.SkinnedModelRenderer",
-              "__guid": "6ef5433f-3f88-4a93-96ed-a0dcb82f758b",
+              "__guid": "ce26765d-306a-4081-beb2-3fbbdb403793",
               "__enabled": true,
               "Flags": 0,
               "AnimationGraph": null,
@@ -898,11 +919,6 @@
     "GameObjectSystems": {
       "Sandbox.MovieMaker.MovieRecorderSystem": {
         "DisableClientRecording": false
-      },
-      "Sandbox.Clutter.ClutterGridSystem": {
-        "Storage": {
-          "$blob": "175ebcf0-9a23-444d-a489-24c0ce86b14e"
-        }
       }
     }
   },
