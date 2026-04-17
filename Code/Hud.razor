@@ -78,7 +78,7 @@
         if (PlayerTracker == null || PlayerTracker.Controller == null) return;
 
         // calculate absolute velocity
-        AbsSpeed = PlayerTracker.Controller.Velocity.WithZ(0).Length;
+        AbsSpeed = PlayerTracker.Controller.Velocity.Length;
         PeakAbs.Update(AbsSpeed);
 
         // making our x and y readings relative to the camera direction
