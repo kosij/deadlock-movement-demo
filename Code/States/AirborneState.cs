@@ -28,6 +28,14 @@ public class AirborneState : BaseState
             targetVelocity += wishDir * accelAmount;
         }
 
+        // soft-cap air drag
+        Vector3 lateralVelocity = targetVelocity.WithZ( 0 );
+        if ( lateralVelocity.Length > 300 )
+        {
+            lateralVelocity = Vector3.Lerp( lateralVelocity, lateralVelocity.Normal * Manager.AirSpeed, Manager.AirDrag * Time.Delta );
+            targetVelocity = lateralVelocity.WithZ( targetVelocity.z );
+        }
+
         // add gravity
         targetVelocity.z -= Manager.Gravity * Time.Delta;
 

@@ -20,6 +20,7 @@ public sealed class Movement : Component
     [Property] public float AirDashSpeed { get; set; } = 527f;
     [Property] public float GroundDashDuration { get; set; } = 0.3f;
     [Property] public float AirDashDuration { get; set; } = 0.2f;
+    [Property] public float AirDrag { get; set; } = 2f;
 
     public bool HasAirDashed { get; set; } = false;
 
