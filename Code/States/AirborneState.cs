@@ -35,9 +35,22 @@ public class AirborneState : BaseState
 
         // --- transitions ---
 
+        // dash
+        if ( Input.Pressed( "run" ) && !Manager.HasAirDashed && !Input.AnalogMove.IsNearlyZero() )
+        {
+            return new DashState( Manager );
+        }
+
         // landed
         if ( Manager.Controller.IsOnGround )
         {
+            // slide queuing (if they hold crouch while falling)
+            // we must omit the Z-axis, otherwise terminal fall speed falsely triggers slides!
+            if ( Input.Down( "crouch" ) && Manager.Controller.Velocity.WithZ(0).Length > Manager.MinSlideSpeed )
+            {
+                return new SlideState( Manager );
+            }
+
             return new GroundedState( Manager );
         }
 

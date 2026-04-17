@@ -16,6 +16,12 @@ public sealed class Movement : Component
     [Property] public float CrouchSpeed { get; set; } = 100f;
     [Property] public float SlideSpeed { get; set; } = 50f;
     [Property] public float SlideAcceleration { get; set; } = 50f;
+    [Property] public float GroundDashSpeed { get; set; } = 579f;
+    [Property] public float AirDashSpeed { get; set; } = 527f;
+    [Property] public float GroundDashDuration { get; set; } = 0.3f;
+    [Property] public float AirDashDuration { get; set; } = 0.2f;
+
+    public bool HasAirDashed { get; set; } = false;
 
 
     [RequireComponent] public CitizenAnimationHelper Animator { get; set; }

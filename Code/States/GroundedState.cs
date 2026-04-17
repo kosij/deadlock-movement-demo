@@ -5,6 +5,12 @@ public class GroundedState : BaseState
 {
     public GroundedState( Movement manager ) : base( manager ) { }
 
+    public override void Enter()
+    {
+        // refund air dash count
+        Manager.HasAirDashed = false;
+    }
+
     public override BaseState Update()
     {
         // local vars and camera
@@ -36,24 +42,28 @@ public class GroundedState : BaseState
 
 
         // --- transitions ---
+
+        // dash
+        if ( Input.Pressed( "run" ) && !Input.AnalogMove.IsNearlyZero() )
+        {
+            return new DashState( Manager );
+        }
+
         // jump
         if ( Input.Pressed( "jump" ) )
         {
             Manager.Controller.Punch( Vector3.Up * Manager.JumpForce );
         }
-        // crouch held down
-        if ( Input.Down( "crouch" ) )
+
+        // slide (explicitly requires the button to be PRESSED this frame)
+        if ( Input.Pressed( "crouch" ) && Manager.Controller.Velocity.Length > Manager.MinSlideSpeed )
         {
-            // fast enough -> slide
-            if ( Manager.Controller.Velocity.Length > Manager.MinSlideSpeed)
-            {
-                return new SlideState( Manager );
-            }
-            // crouch walk
-            else
-            {
-                return new CrouchState( Manager );
-            }
+            return new SlideState( Manager );
+        }
+        // crouch (fallback if just holding the button)
+        else if ( Input.Down( "crouch" ) )
+        {
+            return new CrouchState( Manager );
         }
 
         // if no longer on the ground transition to AirborneState

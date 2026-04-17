@@ -42,6 +42,12 @@ public class CrouchState : BaseState
         Manager.Controller.Velocity = targetVelocity;
 
         // --- transitions ---
+
+        // dash
+        if ( Input.Pressed( "run" ) && !Input.AnalogMove.IsNearlyZero() )
+        {
+            return new DashState( Manager );
+        }
         
         // airborne
         if ( !Manager.Controller.IsOnGround ) return new AirborneState( Manager );
@@ -58,6 +64,6 @@ public class CrouchState : BaseState
     public override void Exit()
     {
         // restore height (stand up)
-        Manager.Controller.Height = 72f;
+        Manager.Controller.Height = 64f;
     }
 }

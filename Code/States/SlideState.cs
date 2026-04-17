@@ -7,6 +7,8 @@ public class SlideState : BaseState
 
     public override void Enter()
     {
+        // refund air dash count 
+        Manager.HasAirDashed = false;
         // crouch camera height
         Manager.Controller.Height = 36f;
     }
