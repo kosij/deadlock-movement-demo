@@ -57,17 +57,33 @@ public sealed class Movement : Component
     {
         if ( Animator == null ) return;
 
-        Animator.WithVelocity( Controller.Velocity );
+        // freeze the legs animation during dash and slide
+        if ( CurrentState is SlideState || CurrentState is DashState )
+        {
+            Animator.WithVelocity( Vector3.Zero );
+        }
+        else
+        {
+            Animator.WithVelocity( Controller.Velocity );
+        }
+
         Animator.WithWishVelocity( CurrentState.WishDir );
         Animator.IsGrounded = Controller.IsOnGround;
 
-        if ( CurrentState is CrouchState || CurrentState is SlideState ) 
+        if ( CurrentState is SlideState ) 
         {
             Animator.DuckLevel = 1f;
+            Animator.IsSitting = true;
+        }
+        else if ( CurrentState is CrouchState )
+        {
+            Animator.DuckLevel = 1f;
+            Animator.IsSitting = false;
         }
         else 
         {
             Animator.DuckLevel = 0f;
+            Animator.IsSitting = false;
         }
     }
 
