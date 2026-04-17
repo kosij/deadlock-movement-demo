@@ -45,7 +45,7 @@ public class AirborneState : BaseState
         if ( Manager.Controller.IsOnGround )
         {
             // slide queuing (if they hold crouch while falling)
-            // we must omit the Z-axis, otherwise terminal fall speed falsely triggers slides!
+            // ommiting the z axis so fall speed doesn't factor into slide threshold check
             if ( Input.Down( "crouch" ) && Manager.Controller.Velocity.WithZ(0).Length > Manager.MinSlideSpeed )
             {
                 return new SlideState( Manager );
