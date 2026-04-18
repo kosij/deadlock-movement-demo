@@ -22,6 +22,34 @@
 
 > **Media:**
 
+`testing presence of air drag using Mina`
+
+https://github.com/user-attachments/assets/442a153b-e1cc-461a-9692-75e02c74204b
+
+while limiting the z velocity as much as possible, we can observe a clear velocity decay
+
+<br><br>
+
+`air dash -> slide`
+
+https://github.com/user-attachments/assets/beeeadbd-526e-4ed0-ad85-722ef449a242
+
+<br><br>
+
+`ground dash -> slide interrupt`
+
+https://github.com/user-attachments/assets/33e24972-dbae-46ec-a4c6-5da9be5e2b60
+
+pressing crouch during a ground dash will interrupt with a slide
+
+<br><br>
+
+`crouch -> ground dash`
+
+https://github.com/user-attachments/assets/664d31b4-8871-4e5e-9438-feeb837a0f24
+
+holding crouch since before the dash results in the full uninterrupted dash duration
+
 
 <br><br>
 
