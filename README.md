@@ -11,6 +11,9 @@
 - [ ] (Bonus) Edge Boosting
 - [ ] Mantling (Planned)
 - [ ] (Bonus) Mantle Sliding
+- [ ] (Environmental) Ziplines
+- [ ] (Environmental) Vents
+- [ ] Stamina System (Planned)
 
 
 ## Technical Goal
