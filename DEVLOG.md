@@ -2,6 +2,31 @@
 
 ---
 
+## 5 [April 17, 2026] - Feature: Dash State & Soft-Cap Air Physics
+
+<br><br>
+
+**Features Implemented:**
+*   **Dash State:**  Implemented a time-locked DashState with distinct speeds for ground (579) and air (527). The physics velocity is there and matches Deadlock's values, but the overall feel is smoother and lacks the punchiness of the reference. I think the native interpolation of the CitizenAnimationHelper is softening the impact, and missing VFX and camera movement probably account for the rest.
+*   **Slide Queuing from the Air:**  When landing from a dash while holding crouch, the player drops directly into a slide if above the speed threshold. I also noticed when testing in Deadlock that crouching from airborne seems to briefly flash a standing frame first ( it could just be that the falling pose and standing pose are similar ) - which suggests there might not be a direct airborne → crouch transition in the reference. I haven't confirmed this but it informed how I wired the landing logic.
+*   **Soft-Cap Air Drag:** Added a Lerp-based drag to `AirborneState` that bleeds lateral speed down to 300 units.
+*   **Prototype Slide Animation:** Bypassed the `CitizenAnimationHelper`'s walk-cycle blending by passing `Vector3.Zero` to `Animator.WithVelocity()` during slides and dashes, which freezes the legs in a static pose. It doesn't look great, but it makes it much easier to visually distinguish between movement states while testing the physics.
+*   **Dash Interrupt Behaviour:**  Pressing crouch during a dash will interrupt it and drop the player into a slide. Holding crouch since before the dash began will not interrupt it, instead the player exits the dash naturally and lands in a crouch. This is implemented using `Input.Pressed` for the interrupt check and `Input.Down` for the post-dash landing check.
+
+<br><br>
+
+**Key Learnings & Takeaways:**
+*   **Air Drag Investigation:** A normal running jump was consistently landing above the slide speed threshold, which didn't match Deadlock's behaviour. I wasn't sure if air drag even existed in the reference, so the mismatch prompted me to test further. I used Mina to test this because she has a glide ability to roughly neutralize her Z velocity while airborne. This made it easier to isolate whether lateral speed was actually decaying through the air. It was, so I implemented a Lerp-based soft cap to match.
+
+<br><br>
+
+> **Media:**
+
+
+<br><br>
+
+---
+
 <br><br>
 
 ## 4 [April 16, 2026] - Feature: Telemetry HUD & Slide Kinematics
