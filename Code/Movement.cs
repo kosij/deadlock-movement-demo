@@ -22,6 +22,8 @@ public sealed class Movement : Component
     [Property] public float GroundDashDuration { get; set; } = 0.3f;
     [Property] public float AirDashDuration { get; set; } = 0.2f;
     [Property] public float AirDrag { get; set; } = 2f;
+    [Property] public float DashJumpForce { get; set; } = 560f;
+    [Property] public float DashJumpWindow { get; set; } = 0.7f;
 
     public bool HasAirDashed { get; set; } = false;
     public bool HasDoubleJumped { get; set; } =false;

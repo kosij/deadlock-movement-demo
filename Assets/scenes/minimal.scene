@@ -748,11 +748,14 @@
           "AirDashDuration": 0.5,
           "AirDashSpeed": 527,
           "AirDrag": 0.5,
+          "AirJumpForce": 500,
           "AirSpeed": 30,
           "CrouchSpeed": 187,
+          "DashJumpForce": 406,
+          "DashJumpWindow": 0.7,
           "Gravity": 800,
           "GroundAcceleration": 4,
-          "GroundDashDuration": 0.6,
+          "GroundDashDuration": 0.5,
           "GroundDashSpeed": 579,
           "GroundFriction": 4,
           "JumpForce": 287,
@@ -825,7 +828,7 @@
           "__guid": "44d3c163-d620-4cb6-bd7b-271f6b8f9d8e",
           "__enabled": true,
           "Flags": 0,
-          "Distance": 250,
+          "Distance": 350,
           "OnComponentDestroy": null,
           "OnComponentDisabled": null,
           "OnComponentEnabled": null,
@@ -929,13 +932,13 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
+      "Sandbox.MovieMaker.MovieRecorderSystem": {
+        "DisableClientRecording": false
+      },
       "Sandbox.Clutter.ClutterGridSystem": {
         "Storage": {
           "$blob": "a9bd60e0-7d9a-4db2-bd07-965f215ce664"
         }
-      },
-      "Sandbox.MovieMaker.MovieRecorderSystem": {
-        "DisableClientRecording": false
       }
     }
   },

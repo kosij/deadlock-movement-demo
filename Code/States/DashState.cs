@@ -6,6 +6,7 @@ public class DashState : BaseState
     private TimeSince TimeSinceEntered;
     private Vector3 DashVelocity;
     private float DashDuration;
+    private bool DashJumpLockedOut = false;
 
     public DashState( Movement manager ) : base( manager ) { }
 
@@ -40,10 +41,31 @@ public class DashState : BaseState
         // lock momentum to ignore friction/gravity
         Manager.Controller.Velocity = DashVelocity;
 
+        // --- transitions ---
+
         // allow slide interrupt if crouch is explicitly PRESSED mid-dash
         if ( Manager.Controller.IsOnGround && Input.Pressed( "crouch" ) && DashVelocity.Length > Manager.MinSlideSpeed )
         {
             return new SlideState( Manager );
+        }
+
+        // dash-jump window
+        // if jump is pressed before the window opens, lock it out
+        if ( Input.Pressed( "jump" ) && TimeSinceEntered < DashDuration * Manager.DashJumpWindow )
+        {
+            DashJumpLockedOut = true;
+            Log.Info( $"Dash Jump: TOO EARLY ({TimeSinceEntered:F3}s / window opens at {DashDuration * Manager.DashJumpWindow:F3}s)" );
+        }
+        // if successful dash-jump timing:
+        if ( Manager.Controller.IsOnGround && !DashJumpLockedOut && TimeSinceEntered > DashDuration * Manager.DashJumpWindow )
+        {
+            if ( Input.Pressed( "jump" ) )
+            {
+                Log.Info( "DASH SUCCESSFUL" );
+                Manager.Controller.Velocity = DashVelocity.WithZ( 0 ) * 1.2f;
+                Manager.Controller.Punch( Vector3.Up * Manager.DashJumpForce );
+                return new AirborneState( Manager );
+            }
         }
 
         // don't allow player to interrupt a dash with another dash or jump.
