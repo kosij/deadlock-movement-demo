@@ -5,15 +5,16 @@
 - [x] CharacterController Integration
 - [x] Camera-relative WishDir Projection
 - [x] Air Strafe Physics
-- [x] Dash Mechanics (Planned)
-- [ ] Double-Jumping (Planned)
-- [ ] Wall Bouncing (Planned)
+- [x] Dash Mechanics
+- [x] Double-Jumping
+- [x] Dash-Jump
+- [ ] Wall Bouncing
 - [ ] (Bonus) Edge Boosting
-- [ ] Mantling (Planned)
+- [ ] Mantling
 - [ ] (Bonus) Mantle Sliding
 - [ ] (Environmental) Ziplines
 - [ ] (Environmental) Vents
-- [ ] Stamina System (Planned)
+- [ ] Stamina System
 
 
 ## Technical Goal
