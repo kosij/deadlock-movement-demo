@@ -19,3 +19,8 @@
 
 ## Technical Goal
 > To implement a momentum-conservative state machine that handles stamina-gated movement actions while maintaining the classic Source "snappiness" through custom WishDir projection.
+
+## Calibration Backlog
+> Physics values to measure and match against the Deadlock reference.
+
+
