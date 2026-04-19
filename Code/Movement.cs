@@ -7,6 +7,7 @@ public sealed class Movement : Component
     [Property] public float Speed { get; set; } = 300f;
     [Property] public float Gravity { get; set; } = 800f;
     [Property] public float JumpForce { get; set; } = 300f;
+    [Property] public float AirJumpForce { get; set; } = 500f;
     [Property] public float GroundFriction { get; set; } = 4f;
     [Property] public float GroundAcceleration { get; set; } = 10f;
     [Property] public float AirSpeed { get; set; } = 30f;
@@ -23,6 +24,7 @@ public sealed class Movement : Component
     [Property] public float AirDrag { get; set; } = 2f;
 
     public bool HasAirDashed { get; set; } = false;
+    public bool HasDoubleJumped { get; set; } =false;
 
 
     [RequireComponent] public CitizenAnimationHelper Animator { get; set; }

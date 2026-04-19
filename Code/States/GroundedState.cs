@@ -9,6 +9,7 @@ public class GroundedState : BaseState
     {
         // refund air dash count
         Manager.HasAirDashed = false;
+        Manager.HasDoubleJumped = false;
     }
 
     public override BaseState Update()

@@ -38,6 +38,13 @@ public class AirborneState : BaseState
 
         // add gravity
         targetVelocity.z -= Manager.Gravity * Time.Delta;
+        
+        // jump
+        if ( Input.Pressed( "jump" ) && !Manager.HasDoubleJumped )
+        {
+            targetVelocity.z = Manager.AirJumpForce;
+            Manager.HasDoubleJumped = true;
+        }
 
         Manager.Controller.Velocity = targetVelocity;
 
