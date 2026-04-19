@@ -62,7 +62,7 @@ public class DashState : BaseState
             if ( Input.Pressed( "jump" ) )
             {
                 Log.Info( "DASH SUCCESSFUL" );
-                Manager.Controller.Velocity = DashVelocity.WithZ( 0 ) * 1.2f;
+                Manager.Controller.Velocity = DashVelocity.WithZ( 0 ) * 1.2f; // tuned to match reference absolute velocity
                 Manager.Controller.Punch( Vector3.Up * Manager.DashJumpForce );
                 return new AirborneState( Manager );
             }
