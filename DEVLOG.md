@@ -2,7 +2,31 @@
 
 ---
 
+## 6 [April 19, 2026] - Feature: Double Jump & Dash-Jump
+
+<br><br>
+
+**Features Implemented:**
+*   **Double Jump:** Added a second jump available while airborne using a `HasDoubleJumped` flag which resets on landing. The `AirJumpForce` value is a rough estimate for now and will need to be measured against the Deadlock reference before it can be considered calibrated.
+*   **Dash-Jump:** A skill-gated jump available only in the tail end of a ground dash. Pressing jump too early locks out the window for that dash. The most interesting part was reverse-engineering the trajectory from two observations in Deadlock: the total 3D velocity (`806`) and a visual estimate that the jump height was roughly double a regular jump. With gravity confirmed as `800` in both systems, I was able to work backwards to solve for the required horizontal and vertical components and reproduce the same trajectory.
+
+<br><br>
+
+**Key Learnings & Takeaways:**
+*   **`Controller.Punch()` vs direct velocity assignment:** The regular jump and dash-jump both use `Punch()` to apply the upward impulse because the player is grounded ( I might need to review this when I add things like coyote time or input buffering ). `Punch()` is processed after the controller's ground-snapping pass inside `Move()`, so it is guaranteed to apply the impulse. The double jump uses direct `targetVelocity.z` assignment instead, because the player is already airborne and there is no ground-snap to fight. Getting this wrong caused the dash-jump to log as successful but produce no visible jump until the distinction was made.
+
+<br><br>
+
+> **Media:**
+
+
+
+<br><br>
+
+---
+
 ## 5 [April 17, 2026] - Feature: Dash State & Soft-Cap Air Physics
+
 
 <br><br>
 
