@@ -7,9 +7,10 @@ public class GroundedState : BaseState
 
     public override void Enter()
     {
-        // refund air dash count
+        // refund air movement
         Manager.HasAirDashed = false;
         Manager.HasDoubleJumped = false;
+        Manager.HasWallJumped = false;
     }
 
     public override BaseState Update()

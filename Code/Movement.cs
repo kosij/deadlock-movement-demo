@@ -24,9 +24,13 @@ public sealed class Movement : Component
     [Property] public float AirDrag { get; set; } = 2f;
     [Property] public float DashJumpForce { get; set; } = 560f;
     [Property] public float DashJumpWindow { get; set; } = 0.7f;
+    [Property] public float WallJumpForce { get; set; } = 400f;
+    [Property] public float WallJumpKickForce { get; set; } = 300f;
+    [Property] public float WallJumpInputBoost { get; set; } = 200f;
 
     public bool HasAirDashed { get; set; } = false;
-    public bool HasDoubleJumped { get; set; } =false;
+    public bool HasDoubleJumped { get; set; } = false;
+    public bool HasWallJumped { get; set; } = false;
 
 
     [RequireComponent] public CitizenAnimationHelper Animator { get; set; }

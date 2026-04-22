@@ -69,6 +69,28 @@ public class AirborneState : BaseState
             return new GroundedState( Manager );
         }
 
+        // wall slide (detect walls)
+        bool touchingWall = false;
+        Vector3 center = Manager.Transform.Position + Vector3.Up * 32f; // middle of the player
+        for ( int i = 0; i < 8; i++ )
+        {
+            Vector3 dir = Rotation.FromYaw( i * 45f ).Forward;
+            var hit = Manager.Scene.Trace.Ray( center, center + dir * 24f )
+                .IgnoreGameObjectHierarchy( Manager.GameObject )
+                .Run();
+
+            if ( hit.Hit && Math.Abs( hit.Normal.z ) < 0.1f )
+            {
+                touchingWall = true;
+                break; // just checking if we are touching a wall
+            }
+        }
+
+        if ( touchingWall )
+        {
+            return new WallSlideState( Manager );
+        }
+
         // stay airborne
         this.WishDir = wishDir;
         return null;
