@@ -88,6 +88,13 @@ public sealed class Movement : Component
             Animator.DuckLevel = 1f;
             Animator.IsSitting = false;
         }
+        else if ( CurrentState is WallSlideState )
+        {
+            // pretending we are grounded so we can use the crouch animation for wall slide
+            Animator.IsGrounded = true;
+            Animator.DuckLevel = 1f;
+            Animator.IsSitting = false;
+        }
         else 
         {
             Animator.DuckLevel = 0f;
