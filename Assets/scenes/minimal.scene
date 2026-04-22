@@ -771,6 +771,7 @@
           "SlideSpeed": 20,
           "Speed": 386,
           "WallJumpForce": 400,
+          "WallJumpInputBoost": 100,
           "WallJumpKickForce": 200
         },
         {
