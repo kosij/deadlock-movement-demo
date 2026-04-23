@@ -9,13 +9,14 @@
 - [x] Double-Jumping
 - [x] Dash-Jump
 - [x] Wall Bouncing
+- [x] Sliding on slopes (min. slide-speed variation)
 - [ ] (Bonus) Edge Boosting
 - [ ] Mantling
 - [ ] (Bonus) Mantle Sliding
 - [ ] (Environmental) Ziplines
 - [ ] (Environmental) Vents
 - [ ] Stamina System
-- [ ] Sliding on slopes (min. slide-speed variation)
+
 
 
 ## Technical Goal
