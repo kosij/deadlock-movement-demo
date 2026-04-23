@@ -25,8 +25,27 @@ public class SlideState : BaseState
         wishDir = wishDir.Normal;
         Vector3 targetVelocity = Manager.Controller.Velocity;
 
-        // apply friciton
-        targetVelocity = Vector3.Lerp( targetVelocity, Vector3.Zero, Manager.SlideFriction * Time.Delta );
+        // calculate slide threshold based on slope direction
+        var groundTrace = Manager.Controller.TraceDirection( Vector3.Down * 2f );
+        Vector3 downhillDir = groundTrace.Normal.WithZ(0).Normal;
+        float slopeDot = Vector3.Dot( targetVelocity.WithZ(0).Normal, downhillDir );
+        
+        bool isMovingDownhill = slopeDot > 0.17f; // 80 degrees either side of straight downhill
+
+        if ( isMovingDownhill )
+        {
+            // accelerate down the slope using gravity
+            // the steeper the slope (Normal.z gets closer to 0), the more gravity applies
+            float slopeSteepness = 1f - groundTrace.Normal.z;
+            float gravityPull = 800f;
+            
+            targetVelocity += downhillDir * (gravityPull * slopeSteepness * Time.Delta);
+        }
+        else
+        {
+            // apply friction (no friction if sliding downhill)
+            targetVelocity = Vector3.Lerp( targetVelocity, Vector3.Zero, Manager.SlideFriction * Time.Delta );
+        }
 
         // calculate speed dot product and budget
         float currentSpeed = Vector3.Dot( targetVelocity, wishDir );
@@ -59,8 +78,9 @@ public class SlideState : BaseState
         // un-crouch
         if ( !Input.Down( "crouch" ) ) return new GroundedState( Manager );
 
-        // too slow
-        if ( targetVelocity.Length < Manager.CrouchSpeed ) return new CrouchState( Manager );
+        // too slow (0 threshold if moving downhill)
+        float currentExitThreshold = isMovingDownhill ? 0f : Manager.CrouchSpeed;
+        if ( targetVelocity.Length < currentExitThreshold ) return new CrouchState( Manager );
 
         // stay in Slide State
         this.WishDir = wishDir;

@@ -59,9 +59,21 @@ public class AirborneState : BaseState
         // landed
         if ( Manager.Controller.IsOnGround )
         {
+            // calculate slide threshold based on slope direction
+            var groundTrace = Manager.Controller.TraceDirection( Vector3.Down * 2f );
+            Vector3 downhillDir = groundTrace.Normal.WithZ(0).Normal;
+            float slopeDot = Vector3.Dot( Manager.Controller.Velocity.WithZ(0).Normal, downhillDir );
+            float currentSlideThreshold = Manager.MinSlideSpeed;
+
+            if ( slopeDot > 0.17f ) // 80 degrees either side of straight downhill
+            {
+                // instantly drop threshold to 0 if within the downhill cone
+                currentSlideThreshold = 0f;
+            }
+
             // slide queuing (if they hold crouch while falling)
             // ommiting the z axis so fall speed doesn't factor into slide threshold check
-            if ( Input.Down( "crouch" ) && Manager.Controller.Velocity.WithZ(0).Length > Manager.MinSlideSpeed )
+            if ( Input.Down( "crouch" ) && Manager.Controller.Velocity.WithZ(0).Length > currentSlideThreshold )
             {
                 return new SlideState( Manager );
             }

@@ -57,8 +57,20 @@ public class GroundedState : BaseState
             Manager.Controller.Punch( Vector3.Up * Manager.JumpForce );
         }
 
+        // calculate slide threshold based on slope direction
+        var groundTrace = Manager.Controller.TraceDirection( Vector3.Down * 2f );
+        Vector3 downhillDir = groundTrace.Normal.WithZ(0).Normal;
+        float slopeDot = Vector3.Dot( Manager.Controller.Velocity.WithZ(0).Normal, downhillDir );
+        float currentSlideThreshold = Manager.MinSlideSpeed;
+
+        if ( slopeDot > 0.17f ) // 80 degrees either side of straight downhill
+        {
+            // instantly drop threshold to 0 if within the downhill cone
+            currentSlideThreshold = 0f;
+        }
+
         // slide (explicitly requires the button to be PRESSED this frame)
-        if ( Input.Pressed( "crouch" ) && Manager.Controller.Velocity.Length > Manager.MinSlideSpeed )
+        if ( Input.Pressed( "crouch" ) && Manager.Controller.Velocity.Length > currentSlideThreshold )
         {
             return new SlideState( Manager );
         }
