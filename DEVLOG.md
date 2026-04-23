@@ -2,6 +2,27 @@
 
 ---
 
+## 8 [April 23, 2026] - Feature: Dynamic Slope Sliding
+
+<br><br>
+
+**Features Implemented:**
+*   **Dynamic Slope-Sliding Threshold:** Implemented a system that reduces the `MinSlideSpeed` requirement to 0 if the player's horizontal velocity is moving downhill. This allows the player to transition into a slide almost instantly when moving in the downhill direction of a slope.
+*   **Gravity-Assisted Sliding:** Updated `SlideState` to inject artificial gravity acceleration into the player's horizontal momentum when sliding downhill. This ensures the player maintains or gains speed smoothly when coasting down stairs without holding movement keys.
+
+<br><br>
+
+**Key Learnings & Takeaways:**
+*   **Zero-Friction Gravity Injection:** My movement logic zeroes out the Z-axis velocity to keep the player snapped to the floor so sliding downhill doesn't naturally accelerate the player which feels unnatural. Manually applying a gravity multiplier to the horizontal velocity based on the slope gradient makes the slide feel much better.
+
+<br><br>
+
+> **Media:**
+
+
+
+<br><br>
+
 ## 7 [April 22, 2026] - Feature: Test Arena & Wall Jumping
 
 <br><br>
@@ -14,7 +35,7 @@
 
 **Key Learnings & Takeaways:**
 *   **Slope-Sliding Physics Analysis:** I discovered a mismatch in slide behavior when interacting with slopes. In Deadlock, sliding down a slope requires almost no initial momentum, while sliding upwards requires the standard threshold. This is probably calculated using the Dot Product between the player's velocity and the ground normal (to determine if their momentum is carrying them downhill), and then applies a multiplier to the `MinSlideSpeed` requirement. I logged this in the backlog as a feature to implement.
-*   **Wall Detection Methods:** Initially, I tried to detect walls by checking if the player's collision box was overlapping a wall, but the physics engine couldn't tell which side of the wall was hit, so it always bounced the player in the exact same default direction. I fixed this by shooting 8  raycasts outwards from the center of the player. When a raycast hits the wall we get the exact normal of the surface hit.
+*   **Wall Detection Methods:** Initially, I tried to detect walls by checking if the player's collision box was overlapping a wall, but the physics engine couldn't tell which side of the wall was hit, so it always bounced the player in the exact same default direction. I fixed this by shooting 8 raycasts outwards from the center of the player. When a raycast hits the wall we get the exact normal of the surface hit.
 
 <br><br>
 
