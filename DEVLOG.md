@@ -2,6 +2,30 @@
 
 ---
 
+## 7 [April 22, 2026] - Feature: Test Arena & Wall Jumping
+
+<br><br>
+
+**Features Implemented:**
+*   **Test Arena Geometry:** Built a greybox testing environment containing a slanted plane, and vertical walls to serve as the physical testing ground for upcoming mechanics.
+*   **Wall Bouncing & WallSlideState:** Implemented Deadlock's Wall Jump physics. Added an 8-way directional raycast to `AirborneState` to detect walls. Colliding with a wall transitions the player into a new `WallSlideState`. Jumping off the wall averages the normals of all walls being touched, completely wipes velocity along that normal, preserves parallel velocity, and applies a flat outward kick and upward pop. Consecutive wall jumps don't provide any pop, only the kick. The player's directional input also applies a direct impulse burst to manipulate the bounce trajectory.
+
+<br><br>
+
+**Key Learnings & Takeaways:**
+*   **Slope-Sliding Physics Analysis:** I discovered a mismatch in slide behavior when interacting with slopes. In Deadlock, sliding down a slope requires almost no initial momentum, while sliding upwards requires the standard threshold. This is probably calculated using the Dot Product between the player's velocity and the ground normal (to determine if their momentum is carrying them downhill), and then applies a multiplier to the `MinSlideSpeed` requirement. I logged this in the backlog as a feature to implement.
+*   **Wall Detection Methods:** Initially, I tried to detect walls by checking if the player's collision box was overlapping a wall, but the physics engine couldn't tell which side of the wall was hit, so it always bounced the player in the exact same default direction. I fixed this by shooting 8  raycasts outwards from the center of the player. When a raycast hits the wall we get the exact normal of the surface hit.
+
+<br><br>
+
+> **Media:**
+
+
+
+<br><br>
+
+---
+
 ## 6 [April 19, 2026] - Feature: Double Jump & Dash-Jump
 
 <br><br>
