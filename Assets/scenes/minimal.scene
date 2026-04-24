@@ -215,7 +215,7 @@
       "Rotation": "0,0,0,1",
       "Scale": "25,25,5",
       "Tags": "",
-      "Enabled": true,
+      "Enabled": false,
       "NetworkMode": 2,
       "NetworkFlags": 0,
       "NetworkOrphaned": 0,
@@ -702,7 +702,7 @@
       "__version": 2,
       "Flags": 0,
       "Name": "Player",
-      "Position": "-126.429306,-187.531067,115.576904",
+      "Position": "-126.429306,181.133392,115.576904",
       "Rotation": "0,0,0,1",
       "Scale": "1,1,1",
       "Tags": "",
@@ -771,8 +771,8 @@
           "SlideSpeed": 20,
           "Speed": 386,
           "WallJumpForce": 400,
-          "WallJumpInputBoost": 100,
-          "WallJumpKickForce": 200
+          "WallJumpInputBoost": 50,
+          "WallJumpKickForce": 250
         },
         {
           "__type": "Sandbox.Citizen.CitizenAnimationHelper",
@@ -967,7 +967,7 @@
       "Rotation": "0,0,-0.707106709,0.707106829",
       "Scale": "1.96955633,4.08229971,5.15999985",
       "Tags": "",
-      "Enabled": true,
+      "Enabled": false,
       "NetworkMode": 2,
       "NetworkFlags": 0,
       "NetworkOrphaned": 0,
@@ -1039,7 +1039,7 @@
       "Rotation": "-0.289507836,0,0,0.957175791",
       "Scale": "1,5.21558237,0.563709676",
       "Tags": "",
-      "Enabled": true,
+      "Enabled": false,
       "NetworkMode": 2,
       "NetworkFlags": 0,
       "NetworkOrphaned": 0,
@@ -1102,6 +1102,44 @@
         }
       ],
       "Children": []
+    },
+    {
+      "__guid": "5b3e48d1-2ef9-44ae-b9d7-59c3c19c50b0",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "Map",
+      "Position": "0,0,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.MapInstance",
+          "__guid": "dc5d6a29-f616-4673-989b-c7260b23b200",
+          "__enabled": true,
+          "Flags": 0,
+          "__version": 1,
+          "EnableCollision": true,
+          "MapName": "maps/test_arena.vmap",
+          "NoOrigin": false,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "OnMapLoaded": null,
+          "OnMapUnloaded": null,
+          "UseMapFromLaunch": false
+        }
+      ],
+      "Children": []
     }
   ],
   "SceneProperties": {
@@ -1126,13 +1164,13 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
+      "Sandbox.MovieMaker.MovieRecorderSystem": {
+        "DisableClientRecording": false
+      },
       "Sandbox.Clutter.ClutterGridSystem": {
         "Storage": {
           "$blob": "a9bd60e0-7d9a-4db2-bd07-965f215ce664"
         }
-      },
-      "Sandbox.MovieMaker.MovieRecorderSystem": {
-        "DisableClientRecording": false
       }
     }
   },
