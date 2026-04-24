@@ -28,7 +28,13 @@ public sealed class PlayerCamera : Component
         Vector3 centerPosition = Target.WorldPosition + Vector3.Up * currentTargetHeight;
         Vector3 offset = Scene.Camera.WorldRotation.Backward * Distance;
 
-        // apply position to scene camera
-        Scene.Camera.WorldPosition = centerPosition + offset;
+        // trace to prevent camera clipping through walls
+        var tr = Scene.Trace.Ray( centerPosition, centerPosition + offset )
+            .IgnoreGameObjectHierarchy( Target )
+            .Radius( 8f ) // small sphere so the camera doesn't touch the wall and clip
+            .Run();
+
+        // apply position to scene camera (move it inward if it hit a wall)
+        Scene.Camera.WorldPosition = tr.Hit ? tr.EndPosition : centerPosition + offset;
     }
 }
