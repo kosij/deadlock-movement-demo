@@ -744,7 +744,7 @@
           "__guid": "9858c562-4a25-417a-9d30-2d2e7069300e",
           "__enabled": true,
           "Flags": 0,
-          "AirAcceleration": 100,
+          "AirAcceleration": 50,
           "AirDashDuration": 0.5,
           "AirDashSpeed": 527,
           "AirDrag": 0.5,
