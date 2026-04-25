@@ -10,7 +10,7 @@
 - [x] Dash-Jump
 - [x] Wall Bouncing
 - [x] Sliding on slopes (min. slide-speed variation)
-- [ ] (Bonus) Edge Boosting
+- [x] Edge Boosting
 - [ ] Mantling
 - [ ] (Bonus) Mantle Sliding
 - [ ] (Environmental) Ziplines
