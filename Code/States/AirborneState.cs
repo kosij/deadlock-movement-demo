@@ -94,6 +94,8 @@ public class AirborneState : BaseState
             {
                 targetVelocity.z = Manager.AirJumpForce;
                 Manager.HasDoubleJumped = true;
+                // apply input influence burst ( input direction influences the double jump vector )
+                targetVelocity += wishDir * Manager.WallJumpInputBoost;
             }
         }
 
