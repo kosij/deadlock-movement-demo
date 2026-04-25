@@ -26,3 +26,9 @@
 > Physics values to measure and match against the Deadlock reference (+ other small features/tweaks).
 - [ ] input-based directional impulse on double jumps
 
+## Movement Glossary
+
+Terms used throughout this codebase and devlog which might not be obvious.
+
+- **Edge Boost**: (while airborne) Sliding along a wall and jumping at the corner edge. The diagonal wall normal at the corner adds a forward component to the kick, boosting the player's momentum.
+- **Wall Coyote Time**: A short window after leaving a wall surface where the wall jump input is still accepted.
