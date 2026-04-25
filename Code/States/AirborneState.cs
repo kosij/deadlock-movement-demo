@@ -39,11 +39,39 @@ public class AirborneState : BaseState
         // add gravity
         targetVelocity.z -= Manager.Gravity * Time.Delta;
         
-        // jump
-        if ( Input.Pressed( "jump" ) && !Manager.HasDoubleJumped )
+        // wall-jump or double jump
+        if ( Input.Pressed( "jump" ) )
         {
-            targetVelocity.z = Manager.AirJumpForce;
-            Manager.HasDoubleJumped = true;
+            if ( Manager.TimeSinceLeftWall < Manager.WallCoyoteTime )
+            {
+                Vector3 averageNormal = Manager.LastWallNormal;
+
+                // wipe vertical momentum
+                targetVelocity.z = 0f;
+
+                // wipe momentum in the normal direction
+                // still preserving parallel momentum
+                float dot = Vector3.Dot( targetVelocity, averageNormal );
+                targetVelocity -= averageNormal * dot;
+
+                // apply kick force
+                targetVelocity += averageNormal * Manager.WallJumpKickForce;
+
+                // apply vertical jump force (penalty if consecutive)
+                if ( !Manager.HasWallJumped )
+                {
+                    targetVelocity.z += Manager.WallJumpForce;
+                    Manager.HasWallJumped = true;
+                }
+
+                // apply input influence burst ( input direction influences the wall jump vector )
+                targetVelocity += wishDir * Manager.WallJumpInputBoost;
+            }
+            else if ( !Manager.HasDoubleJumped )
+            {
+                targetVelocity.z = Manager.AirJumpForce;
+                Manager.HasDoubleJumped = true;
+            }
         }
 
         Manager.Controller.Velocity = targetVelocity;

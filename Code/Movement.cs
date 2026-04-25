@@ -27,10 +27,13 @@ public sealed class Movement : Component
     [Property] public float WallJumpForce { get; set; } = 400f;
     [Property] public float WallJumpKickForce { get; set; } = 300f;
     [Property] public float WallJumpInputBoost { get; set; } = 200f;
+    [Property] public float WallCoyoteTime { get; set; } = 0.15f;
 
     public bool HasAirDashed { get; set; } = false;
     public bool HasDoubleJumped { get; set; } = false;
     public bool HasWallJumped { get; set; } = false;
+    public TimeSince TimeSinceLeftWall;
+    public Vector3 LastWallNormal;
 
 
     [RequireComponent] public CitizenAnimationHelper Animator { get; set; }

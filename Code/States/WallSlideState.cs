@@ -96,6 +96,12 @@ public class WallSlideState : BaseState
 
         // --- transitions ---
 
+        // dash
+        if ( Input.Pressed( "run" ) && !Manager.HasAirDashed && !Input.AnalogMove.IsNearlyZero() )
+        {
+            return new DashState( Manager );
+        }
+
         if ( Manager.Controller.IsOnGround )
         {
             if ( Input.Down( "crouch" ) && Manager.Controller.Velocity.WithZ(0).Length > Manager.MinSlideSpeed )
@@ -107,6 +113,8 @@ public class WallSlideState : BaseState
 
         if ( !touchingWall )
         {
+            Manager.LastWallNormal = wallNormalSum.Normal;
+            Manager.TimeSinceLeftWall = 0;
             return new AirborneState( Manager );
         }
 
