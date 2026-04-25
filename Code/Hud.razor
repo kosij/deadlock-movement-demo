@@ -41,6 +41,29 @@
                 <span class="value">@(MathF.Round(RelativeVel.z))</span>
                 <span class="peak">(Peak: @(MathF.Round(PeakZ.Value)))</span>
             </div>
+
+            <div class="row">
+                <span class="label">Coyote Active:</span>
+                <span class="value @(CoyoteActive ? "coyote-active" : "")">
+                    @CoyoteActive
+                </span>
+            </div>
+
+            <div class="row">
+                <span class="label">Coyote Timer:</span>
+                <span class="value">@(MathF.Round((float)PlayerTracker.TimeSinceLeftWall, 2))</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Last Wall N:</span>
+                <span class="value">@(MathF.Round(PlayerTracker.LastWallNormal.x, 1)), @(MathF.Round(PlayerTracker.LastWallNormal.y, 1))</span>
+            </div>
+
+            <div class="row">
+                <span class="label">HasWallJumped:</span>
+                <span class="value">@PlayerTracker.HasWallJumped</span>
+            </div>
+
         }
     </div>
 </root>
@@ -72,6 +95,9 @@
 
     private float AbsSpeed;
     private Vector3 RelativeVel;
+
+    private bool CoyoteActive => PlayerTracker.TimeSinceLeftWall < PlayerTracker.WallCoyoteTime;
+
 
     protected override void OnUpdate()
     {
@@ -143,4 +169,10 @@
         color: #888888;
         font-size: 16px;
     }
+
+    .coyote-active {
+    color: #ffcc00;
+    font-weight: bold;
+    }
+
 </style>
