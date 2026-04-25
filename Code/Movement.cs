@@ -33,7 +33,6 @@ public sealed class Movement : Component
     public bool HasDoubleJumped { get; set; } = false;
     public bool HasWallJumped { get; set; } = false;
     public TimeSince TimeSinceLeftWall;
-    public Vector3 LastWallNormal;
 
 
     [RequireComponent] public CitizenAnimationHelper Animator { get; set; }

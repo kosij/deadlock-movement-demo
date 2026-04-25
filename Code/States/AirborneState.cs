@@ -44,28 +44,51 @@ public class AirborneState : BaseState
         {
             if ( Manager.TimeSinceLeftWall < Manager.WallCoyoteTime )
             {
-                Vector3 averageNormal = Manager.LastWallNormal;
+                // fire raycast starburst to find wall geometry near player's current position during wall coyote time
+                // this naturally captures diagonal corner normals (average between 2 wall normals) for an accurate edge boost kick
+                Vector3 coyoteCenter = Manager.Transform.Position + Vector3.Up * 32f;
+                Vector3 wallNormalSum = Vector3.Zero;
+                bool foundWall = false;
 
-                // wipe vertical momentum
-                targetVelocity.z = 0f;
-
-                // wipe momentum in the normal direction
-                // still preserving parallel momentum
-                float dot = Vector3.Dot( targetVelocity, averageNormal );
-                targetVelocity -= averageNormal * dot;
-
-                // apply kick force
-                targetVelocity += averageNormal * Manager.WallJumpKickForce;
-
-                // apply vertical jump force (penalty if consecutive)
-                if ( !Manager.HasWallJumped )
+                for ( int i = 0; i < 8; i++ )
                 {
-                    targetVelocity.z += Manager.WallJumpForce;
-                    Manager.HasWallJumped = true;
+                    Vector3 dir = Rotation.FromYaw( i * 45f ).Forward;
+                    var hit = Manager.Scene.Trace.Ray( coyoteCenter, coyoteCenter + dir * 64f )
+                        .IgnoreGameObjectHierarchy( Manager.GameObject )
+                        .Run();
+
+                    if ( hit.Hit && Math.Abs( hit.Normal.z ) < 0.1f )
+                    {
+                        wallNormalSum += hit.Normal;
+                        foundWall = true;
+                    }
                 }
 
-                // apply input influence burst ( input direction influences the wall jump vector )
-                targetVelocity += wishDir * Manager.WallJumpInputBoost;
+                if ( foundWall )
+                {
+                    Vector3 averageNormal = wallNormalSum.Normal;
+
+                    // wipe vertical momentum
+                    targetVelocity.z = 0f;
+
+                    // wipe momentum in the normal direction
+                    // still preserving parallel momentum
+                    float dot = Vector3.Dot( targetVelocity, averageNormal );
+                    targetVelocity -= averageNormal * dot;
+
+                    // apply kick force
+                    targetVelocity += averageNormal * Manager.WallJumpKickForce;
+
+                    // apply vertical jump force (penalty if consecutive)
+                    if ( !Manager.HasWallJumped )
+                    {
+                        targetVelocity.z += Manager.WallJumpForce;
+                        Manager.HasWallJumped = true;
+                    }
+
+                    // apply input influence burst ( input direction influences the wall jump vector )
+                    targetVelocity += wishDir * Manager.WallJumpInputBoost;
+                }
             }
             else if ( !Manager.HasDoubleJumped )
             {
