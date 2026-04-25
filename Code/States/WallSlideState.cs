@@ -61,6 +61,12 @@ public class WallSlideState : BaseState
             }
         }
 
+        // continuously store the wall normal while touching so we have a valid value when we exit
+        if ( touchingWall )
+        {
+            Manager.LastWallNormal = wallNormalSum.Normal;
+        }
+
         // wall Jump logic
         if ( touchingWall && Input.Pressed( "jump" ) )
         {
@@ -113,7 +119,6 @@ public class WallSlideState : BaseState
 
         if ( !touchingWall )
         {
-            Manager.LastWallNormal = wallNormalSum.Normal;
             Manager.TimeSinceLeftWall = 0;
             return new AirborneState( Manager );
         }
