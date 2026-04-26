@@ -770,6 +770,7 @@
           "SlideFriction": 0.8,
           "SlideSpeed": 20,
           "Speed": 386,
+          "WallCoyoteTime": 0.15,
           "WallJumpForce": 400,
           "WallJumpInputBoost": 50,
           "WallJumpKickForce": 250
