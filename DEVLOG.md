@@ -1,5 +1,29 @@
 # DevLog
 
+## 9 [April 25, 2026] - Feature: Edge Boosting & Telemetry HUD
+
+<br><br>
+
+**Features Implemented:**
+*   **Edge Boosting (Wall Coyote Time):** Implemented a `TimeSinceLeftWall` timer that keeps the wall jump window open for `0.15s` after leaving a wall. This makes edge boosts ( sliding along a wall past its corner edge before wall jumping and getting a diagonal kick ) consistently accessible rather than frame-perfect.
+*   **Directional Impulse on Double Jump:** Added a `WallJumpInputBoost` burst to the double jump, matching Deadlock's behaviour where holding a direction before an air jump steers your trajectory.
+*   **Telemetry HUD:** Added a debug panel showing coyote window status, timer value, and `HasWallJumped` flag. Used to validate and diagnose wall jump behaviour in real-time.
+*   **Dash from WallSlideState:** Added a missing transition that previously made dash inaccessible while wall sliding.
+*   **Camera Collision:** Added a sphere-cast in `PlayerCamera.cs` to prevent the camera from clipping through walls.
+
+<br><br>
+
+**Key Learnings & Takeaways:**
+*   **Telemetry-Driven Debugging:** The coyote wall jump felt slightly wrong but was hard to pinpoint without data. Building the HUD immediately caught the root cause - `LastWallNormal` was a zero vector on the exit frame, silently degrading the wall jump to a double jump.
+*   **Live Raycasts over Stored State:** After fixing the zero vector bug, the HUD's `Last Wall N:` readout revealed a second problem - the stored normal was always a pure value (e.g., `1.0, 0.0`) at corners, never the diagonal needed for an edge boost. Switched to firing a live 64-unit starburst at the moment of the coyote jump instead. When mid-corner, rays hit both Wall 1 and Wall 2 and the averaged normal is correctly diagonal, producing the forward boost.
+*   **VFX as validation:** Without directional feedback on the kick (no bounce VFX or vector indicator), evaluating the edge boost against the Deadlock reference is difficult. The trajectory feels intentional and natural, but a proper 1:1 comparison might need visual VFX on the kick direction. I am planning to implement a colour-coded vector overlay system to make trajectories and interactions clearer.
+
+<br><br>
+
+> **Media:**
+
+
+
 ---
 
 ## 8 [April 23, 2026] - Feature: Dynamic Slope Sliding
