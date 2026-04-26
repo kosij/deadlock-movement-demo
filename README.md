@@ -24,7 +24,7 @@
 
 ## Calibration Backlog
 > Physics values to measure and match against the Deadlock reference (+ other small features/tweaks).
-- [ ] input-based directional impulse on double jumps
+- [x] input-based directional impulse on double jumps
 
 ## Movement Glossary
 
