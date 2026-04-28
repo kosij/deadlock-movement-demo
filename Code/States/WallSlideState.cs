@@ -2,6 +2,11 @@ using Sandbox;
 using System;
 using System.Linq;
 
+// wall adhesion state. player clings to and slides slowly down a wall surface.
+// uses an 8-ray starburst cast each frame to confirm wall contact. if contact is lost, starts the coyote timer
+// (TimeSinceLeftWall) and returns to AirborneState, allowing a grace-period wall jump.
+// wall jump averages all hitting ray normals for kick direction - at a corner this produces a diagonal boost (edge boost).
+// transitions: wall lost -> AirborneState (starts coyote timer) | jump -> AirborneState | land -> GroundedState | dash -> DashState.
 public class WallSlideState : BaseState
 {
     public WallSlideState( Movement manager ) : base( manager ) { }

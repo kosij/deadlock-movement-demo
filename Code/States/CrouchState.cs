@@ -1,6 +1,9 @@
 using Sandbox;
 using System;
 
+// slow ground movement while crouching. reduces controller height on enter and restores it on exit.
+// uses the same source-style acceleration as GroundedState but capped at CrouchSpeed.
+// transitions: release crouch -> GroundedState | off ledge -> AirborneState | dash -> DashState.
 public class CrouchState : BaseState
 {
     public CrouchState( Movement manager ) : base( manager ) { }

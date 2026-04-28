@@ -1,6 +1,10 @@
 using Sandbox;
 using System;
 
+// default on-ground movement state.
+// handles walking, friction, and jumping. resets all air-use flags (HasAirDashed, HasDoubleJumped, HasWallJumped) on enter.
+// applies source-style ground friction via velocity decay each frame.
+// transitions: jump -> AirborneState | crouch + speed -> SlideState | crouch -> CrouchState | off ledge -> AirborneState.
 public class GroundedState : BaseState
 {
     public GroundedState( Movement manager ) : base( manager ) { }

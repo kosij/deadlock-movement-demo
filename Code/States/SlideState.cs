@@ -1,6 +1,10 @@
 using Sandbox;
 using System;
 
+// low-friction ground slide. entered from GroundedState or DashState when moving above MinSlideSpeed while crouching.
+// preserves and builds horizontal momentum via reduced friction. on slopes, injects gravity-derived horizontal acceleration
+// to keep the player accelerating downhill even when no input is held.
+// transitions: speed below MinSlideSpeed -> CrouchState | jump -> AirborneState.
 public class SlideState : BaseState
 {
     public SlideState( Movement manager ) : base( manager ) { }

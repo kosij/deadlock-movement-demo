@@ -1,6 +1,10 @@
 using Sandbox;
 using System;
 
+// short-duration directional burst. locks velocity to a fixed dash speed for DashDuration seconds.
+// can only trigger once per air phase (HasAirDashed). captures input direction on entry as the locked dash vector.
+// jumping within DashJumpWindow seconds of the dash ending applies a DashJumpForce vertical bonus.
+// transitions: duration elapsed -> AirborneState | land during dash -> GroundedState or SlideState.
 public class DashState : BaseState
 {
     private TimeSince TimeSinceEntered;

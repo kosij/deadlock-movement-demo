@@ -1,6 +1,11 @@
 using Sandbox;
 using System;
 
+// aerial movement state. active whenever the player is not grounded.
+// implements source-style air strafing: acceleration is only added when WishDir has a positive dot product with velocity,
+// preventing uncapped speed gain and preserving the momentum-conservative feel.
+// handles double jump, wall jump coyote window (TimeSinceLeftWall < WallCoyoteTime), and wall detection for WallSlideState.
+// transitions: land -> GroundedState | wall contact -> WallSlideState | dash -> DashState.
 public class AirborneState : BaseState
 {
     public AirborneState( Movement manager ) : base( manager ) { }
