@@ -20,7 +20,7 @@ public sealed class Movement : Component
     [Property] public float AirSpeed { get; set; } = 30f;            // u/s  | lateral air speed cap
     [Property] public float AirAcceleration { get; set; } = 100f;    // mult | air strafe acceleration
     [Property] public float AirDrag { get; set; } = 2f;              // mult | drag applied above AirSpeed cap
-    [Property] public float WallJumpInputBoost { get; set; } = 200f; // u/s  | directional impulse on air jumps
+    [Property] public float AirJumpInputBoost { get; set; } = 200f;  // u/s  | directional impulse on double jump
 
     // --- Slide ---
     [Property] public float MinSlideSpeed { get; set; } = 150f;      // u/s  | minimum speed to enter slide
@@ -40,6 +40,7 @@ public sealed class Movement : Component
     // --- Wall Jump ---
     [Property] public float WallJumpForce { get; set; } = 400f;      // u/s  | vertical velocity on wall jump
     [Property] public float WallJumpKickForce { get; set; } = 300f;  // u/s  | lateral kick away from wall
+    [Property] public float WallJumpInputBoost { get; set; } = 200f; // u/s  | directional impulse on wall jump
     [Property] public float WallCoyoteTime { get; set; } = 0.15f;    // s    | coyote window after leaving wall
 
     public bool HasAirDashed { get; set; } = false;
