@@ -4,30 +4,43 @@ using Sandbox.Citizen;
 
 public sealed class Movement : Component
 {
-    [Property] public float Speed { get; set; } = 300f;
-    [Property] public float Gravity { get; set; } = 800f;
-    [Property] public float JumpForce { get; set; } = 300f;
-    [Property] public float AirJumpForce { get; set; } = 500f;
-    [Property] public float GroundFriction { get; set; } = 4f;
-    [Property] public float GroundAcceleration { get; set; } = 10f;
-    [Property] public float AirSpeed { get; set; } = 30f;
-    [Property] public float AirAcceleration { get; set; } = 100f;
-    [Property] public float SlideFriction { get; set; } = 0.5f;
-    [Property] public float MinSlideSpeed { get; set; } = 150f;
-    [Property] public float CrouchSpeed { get; set; } = 100f;
-    [Property] public float SlideSpeed { get; set; } = 50f;
-    [Property] public float SlideAcceleration { get; set; } = 50f;
-    [Property] public float GroundDashSpeed { get; set; } = 579f;
-    [Property] public float AirDashSpeed { get; set; } = 527f;
-    [Property] public float GroundDashDuration { get; set; } = 0.3f;
-    [Property] public float AirDashDuration { get; set; } = 0.2f;
-    [Property] public float AirDrag { get; set; } = 2f;
-    [Property] public float DashJumpForce { get; set; } = 560f;
-    [Property] public float DashJumpWindow { get; set; } = 0.7f;
-    [Property] public float WallJumpForce { get; set; } = 400f;
-    [Property] public float WallJumpKickForce { get; set; } = 300f;
-    [Property] public float WallJumpInputBoost { get; set; } = 200f;
-    [Property] public float WallCoyoteTime { get; set; } = 0.15f;
+    // property units: u = source world units | s = seconds | mult = dimensionless multiplier
+
+    // --- Physics ---
+    [Property] public float Gravity { get; set; } = 800f;            // u/s² | gravity acceleration
+
+    // --- Ground ---
+    [Property] public float Speed { get; set; } = 300f;              // u/s  | ground movement speed
+    [Property] public float JumpForce { get; set; } = 300f;          // u/s  | vertical jump velocity
+    [Property] public float GroundFriction { get; set; } = 4f;       // mult | deceleration multiplier
+    [Property] public float GroundAcceleration { get; set; } = 10f;  // mult | acceleration multiplier
+
+    // --- Air ---
+    [Property] public float AirJumpForce { get; set; } = 500f;       // u/s  | vertical velocity (double jump)
+    [Property] public float AirSpeed { get; set; } = 30f;            // u/s  | lateral air speed cap
+    [Property] public float AirAcceleration { get; set; } = 100f;    // mult | air strafe acceleration
+    [Property] public float AirDrag { get; set; } = 2f;              // mult | drag applied above AirSpeed cap
+    [Property] public float WallJumpInputBoost { get; set; } = 200f; // u/s  | directional impulse on air jumps
+
+    // --- Slide ---
+    [Property] public float MinSlideSpeed { get; set; } = 150f;      // u/s  | minimum speed to enter slide
+    [Property] public float SlideFriction { get; set; } = 0.5f;      // mult | friction multiplier while sliding
+    [Property] public float SlideSpeed { get; set; } = 50f;          // u/s  | speed added on slide entry
+    [Property] public float SlideAcceleration { get; set; } = 50f;   // u/s² | downhill slide push acceleration
+    [Property] public float CrouchSpeed { get; set; } = 100f;        // u/s  | max speed while crouching
+
+    // --- Dash ---
+    [Property] public float GroundDashSpeed { get; set; } = 579f;    // u/s  | ground dash velocity
+    [Property] public float AirDashSpeed { get; set; } = 527f;       // u/s  | air dash velocity
+    [Property] public float GroundDashDuration { get; set; } = 0.3f; // s    | ground dash duration
+    [Property] public float AirDashDuration { get; set; } = 0.2f;    // s    | air dash duration
+    [Property] public float DashJumpForce { get; set; } = 560f;      // u/s  | vertical boost on dash-jump
+    [Property] public float DashJumpWindow { get; set; } = 0.7f;     // s    | window after dash where jump is boosted
+
+    // --- Wall Jump ---
+    [Property] public float WallJumpForce { get; set; } = 400f;      // u/s  | vertical velocity on wall jump
+    [Property] public float WallJumpKickForce { get; set; } = 300f;  // u/s  | lateral kick away from wall
+    [Property] public float WallCoyoteTime { get; set; } = 0.15f;    // s    | coyote window after leaving wall
 
     public bool HasAirDashed { get; set; } = false;
     public bool HasDoubleJumped { get; set; } = false;
