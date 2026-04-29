@@ -4,7 +4,7 @@ using System;
 // default on-ground movement state.
 // handles walking, friction, and jumping. resets all air-use flags (HasAirDashed, HasDoubleJumped, HasWallJumped) on enter.
 // applies source-style ground friction via velocity decay each frame.
-// transitions: jump -> AirborneState | crouch + speed -> SlideState | crouch -> CrouchState | off ledge -> AirborneState.
+// transitions: jump -> AirborneState | hold jump -> MantleState | crouch + speed -> SlideState | crouch -> CrouchState | off ledge -> AirborneState.
 public class GroundedState : BaseState
 {
     public GroundedState( Movement manager ) : base( manager ) { }
@@ -55,10 +55,17 @@ public class GroundedState : BaseState
             return new DashState( Manager );
         }
 
+
         // jump
         if ( Input.Pressed( "jump" ) )
         {
             Manager.Controller.Punch( Vector3.Up * Manager.JumpForce );
+        }
+
+        // mantle check (carried jump input)
+        if ( Input.Down( "jump" ) && !Input.Pressed( "jump" ) && Manager.TryGetMantleTarget( out Vector3 mantleTarget ) )
+        {
+            return new MantleState( Manager, mantleTarget );
         }
 
         // calculate slide threshold based on slope direction

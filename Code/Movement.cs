@@ -43,6 +43,15 @@ public sealed class Movement : Component
     [Property] public float WallJumpInputBoost { get; set; } = 200f; // u/s  | directional impulse on wall jump
     [Property] public float WallCoyoteTime { get; set; } = 0.15f;    // s    | coyote window after leaving wall
 
+    // --- Mantle ---
+    [Property] public float MaxMantleHeight { get; set; } = 100f;    // u    | max obstacle height above feet (grounded)
+    [Property] public float AirMantleHeight { get; set; } = 130f;    // u    | max obstacle height above feet (airborne)
+    [Property] public float MaxMantleRange { get; set; } = 50f;      // u    | horizontal detection range
+    [Property] public float MantleDuration { get; set; } = 0.35f;    // s    | fixed climb duration
+    [Property] public float MantleForwardOffset { get; set; } = 16f; // u    | horizontal offset past obstacle on landing
+    [Property] public float MantleExitImpulse { get; set; } = 177f;  // u/s  | forward boost on normal mantle exit
+    [Property] public float MantleSlideImpulse { get; set; } = 512f; // u/s  | forward boost when triggering a mantle slide
+
     public bool HasAirDashed { get; set; } = false;
     public bool HasDoubleJumped { get; set; } = false;
     public bool HasWallJumped { get; set; } = false;
@@ -116,6 +125,77 @@ public sealed class Movement : Component
             Animator.DuckLevel = 0f;
             Animator.IsSitting = false;
         }
+    }
+
+    // sweep forward to find a mantleable obstacle and calculate the landing position.
+    // uses AirMantleHeight if airborne to allow for higher ledge grabs.
+    public bool TryGetMantleTarget( out Vector3 targetPos, bool isAirborne = false )
+    {
+        targetPos = Vector3.Zero;
+
+        // restrict mantle to forward movement
+        Vector3 inputDir = Input.AnalogMove;
+        inputDir *= Scene.Camera.WorldRotation;
+        inputDir.z = 0;
+        if ( Vector3.Dot( inputDir.Normal, WorldRotation.Forward ) < 0.5f ) return false;
+
+        Vector3 forward = WorldRotation.Forward.WithZ( 0 ).Normal;
+        Vector3 feet    = Transform.Position;
+        float maxHeight = isAirborne ? AirMantleHeight : MaxMantleHeight;
+
+        // 1. sweep forward for vertical surfaces
+        bool hitWall = false;
+        Vector3 closestWallHit = Vector3.Zero;
+        float minDistance = float.MaxValue;
+
+        int scanCount = 5;
+        for ( int i = 0; i < scanCount; i++ )
+        {
+            float scanHeight = (i + 1) * (maxHeight / scanCount);
+            Vector3 origin = feet + Vector3.Up * scanHeight;
+
+            var hit = Scene.Trace.Ray( origin, origin + forward * MaxMantleRange )
+                .IgnoreGameObjectHierarchy( GameObject )
+                .Run();
+
+            if ( hit.Hit && Math.Abs( hit.Normal.z ) < 0.5f ) // must be a wall
+            {
+                if ( hit.Distance < minDistance )
+                {
+                    minDistance = hit.Distance;
+                    closestWallHit = hit.HitPosition;
+                    hitWall = true;
+                }
+            }
+        }
+
+        if ( !hitWall ) return false;
+
+        // 2. scan downward to find the actual top surface
+        Vector3 scanStart = new Vector3( closestWallHit.x, closestWallHit.y, feet.z + maxHeight ) + forward * 1f;
+        
+        var downTrace = Scene.Trace.Ray( scanStart, scanStart + Vector3.Down * maxHeight )
+            .IgnoreGameObjectHierarchy( GameObject )
+            .Run();
+
+        if ( !downTrace.Hit ) return false;
+
+        float obstacleHeight = downTrace.HitPosition.z - feet.z;
+        if ( obstacleHeight < 0 || obstacleHeight > maxHeight ) return false;
+
+        // 3. calculate target resting position
+        Vector3 candidate = new Vector3( closestWallHit.x, closestWallHit.y, downTrace.HitPosition.z )
+            + forward * (Controller.Radius + MantleForwardOffset);
+
+        // 4. verify headroom clearance
+        var clearHit = Scene.Trace.Ray( candidate, candidate + Vector3.Up * Controller.Height )
+            .IgnoreGameObjectHierarchy( GameObject )
+            .Run();
+
+        if ( clearHit.Hit ) return false;
+
+        targetPos = candidate;
+        return true;
     }
 
 }

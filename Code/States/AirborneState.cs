@@ -5,7 +5,7 @@ using System;
 // implements source-style air strafing: acceleration is only added when WishDir has a positive dot product with velocity,
 // preventing uncapped speed gain and preserving the momentum-conservative feel.
 // handles double jump, wall jump coyote window (TimeSinceLeftWall < WallCoyoteTime), and wall detection for WallSlideState.
-// transitions: land -> GroundedState | wall contact -> WallSlideState | dash -> DashState.
+// transitions: land -> GroundedState | wall contact -> WallSlideState | mantle -> MantleState | dash -> DashState.
 public class AirborneState : BaseState
 {
     public AirborneState( Movement manager ) : base( manager ) { }
@@ -44,6 +44,10 @@ public class AirborneState : BaseState
         // add gravity
         targetVelocity.z -= Manager.Gravity * Time.Delta;
         
+        // mantle check (held jump input)
+        if ( Input.Down( "jump" ) && Manager.TryGetMantleTarget( out Vector3 mantleTarget, isAirborne: true ) )
+            return new MantleState( Manager, mantleTarget );
+
         // wall-jump or double jump
         if ( Input.Pressed( "jump" ) )
         {
