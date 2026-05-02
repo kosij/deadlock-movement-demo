@@ -60,6 +60,7 @@ public sealed class Movement : Component
 
     [RequireComponent] public CitizenAnimationHelper Animator { get; set; }
     [RequireComponent] public CharacterController Controller { get; set; }
+    [RequireComponent] public StaminaComponent Stamina { get; set; }
     public BaseState CurrentState { get; private set; }
 
     protected override void OnStart()

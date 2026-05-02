@@ -852,6 +852,20 @@
             "go": "ced3bfdf-a979-4bcc-bde4-927da52b92e1"
           },
           "TargetHeight": 120
+        },
+        {
+          "__type": "StaminaComponent",
+          "__guid": "e7dc4910-e9b9-41ca-a757-131d115b7be9",
+          "__enabled": true,
+          "Flags": 0,
+          "MaxCharges": 3,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "RegenRate": 0.25
         }
       ],
       "Children": [
@@ -919,7 +933,7 @@
           ],
           "Children": [
             {
-              "__guid": "c4c9a0ad-c01e-4389-82f6-8f26a74666f1",
+              "__guid": "4b036490-2489-4532-9e86-7aba7238e0f8",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - eyebrows",
@@ -936,7 +950,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "d40751aa-0f3b-448c-96ca-73d1d238af03",
+                  "__guid": "180e3be4-fd00-4b9b-9987-4406cade587f",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -988,7 +1002,7 @@
               "Children": []
             },
             {
-              "__guid": "f9fba789-b357-460f-afa5-5bd8d3dc02ee",
+              "__guid": "d5d1bdcc-2616-4d2e-9c62-eef37031b335",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - hair_long_dreadlocks",
@@ -1005,7 +1019,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "66841684-d77c-4625-a5de-69e764417340",
+                  "__guid": "fc8386ff-4e90-470d-b4c7-ff7b03a8dc41",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -1057,7 +1071,7 @@
               "Children": []
             },
             {
-              "__guid": "a691ccb3-c9a4-464e-af32-0e3d2467688b",
+              "__guid": "1378f194-96e4-4d7e-ba72-3dd3bb8255c2",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - football_tshirt",
@@ -1074,7 +1088,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "667588e5-1fa8-4f91-aecc-f809a229b7c6",
+                  "__guid": "92243a46-6902-43fe-b9b1-b245b183b19e",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -1126,7 +1140,7 @@
               "Children": []
             },
             {
-              "__guid": "5b5d6672-a541-4b7f-921b-e51580e92982",
+              "__guid": "ef7df022-b792-4bd4-92b4-18ae10893c9d",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - slippers",
@@ -1143,7 +1157,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "14a55526-8300-4cae-8030-c0b70e98f8ec",
+                  "__guid": "5d5294cf-0a07-4659-8c17-ce6c858dc79d",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -1195,7 +1209,7 @@
               "Children": []
             },
             {
-              "__guid": "539f0e45-148d-47f1-a805-e3aff532e4cb",
+              "__guid": "7a291b3a-505b-4d33-b786-9c95a8cf6fb1",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - boxing_shorts_red",
@@ -1212,7 +1226,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "6059d38b-4224-4f13-9680-b61d9421b181",
+                  "__guid": "ad704380-3c94-4fa8-aad6-8a5d28c651d0",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -1519,17 +1533,17 @@
       "CustomBounds": false
     },
     "GameObjectSystems": {
-      "Sandbox.SelectionSetsSystem": {
-        "Data": {
-          "SelectionSets": []
+      "Sandbox.Clutter.ClutterGridSystem": {
+        "Storage": {
+          "$blob": "a9bd60e0-7d9a-4db2-bd07-965f215ce664"
         }
       },
       "Sandbox.MovieMaker.MovieRecorderSystem": {
         "DisableClientRecording": false
       },
-      "Sandbox.Clutter.ClutterGridSystem": {
-        "Storage": {
-          "$blob": "a9bd60e0-7d9a-4db2-bd07-965f215ce664"
+      "Sandbox.SelectionSetsSystem": {
+        "Data": {
+          "SelectionSets": []
         }
       }
     }
