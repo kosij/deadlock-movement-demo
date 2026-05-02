@@ -50,7 +50,7 @@ public class GroundedState : BaseState
         // --- transitions ---
 
         // dash
-        if ( Input.Pressed( "run" ) && !Input.AnalogMove.IsNearlyZero() )
+        if ( Input.Pressed( "run" ) && !Input.AnalogMove.IsNearlyZero() && Manager.Stamina.TryConsume( 1f ) )
         {
             return new DashState( Manager );
         }

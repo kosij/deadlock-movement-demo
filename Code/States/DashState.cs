@@ -63,7 +63,7 @@ public class DashState : BaseState
         // if successful dash-jump timing:
         if ( Manager.Controller.IsOnGround && !DashJumpLockedOut && TimeSinceEntered > DashDuration * Manager.DashJumpWindow )
         {
-            if ( Input.Pressed( "jump" ) )
+            if ( Input.Pressed( "jump" ) && Manager.Stamina.TryConsume( 1f ) )
             {
                 Log.Info( "DASH SUCCESSFUL" );
                 Manager.Controller.Velocity = DashVelocity.WithZ( 0 ) * 1.2f; // tuned to match reference absolute velocity

@@ -73,7 +73,11 @@ public class AirborneState : BaseState
                     }
                 }
 
-                if ( foundWall )
+                // first wall jump is free; subsequent ones cost 0.5 stamina
+                // short-circuit: TryConsume only called when HasWallJumped is true
+                bool wallJumpAllowed = !Manager.HasWallJumped || Manager.Stamina.TryConsume( 0.5f );
+
+                if ( foundWall && wallJumpAllowed )
                 {
                     Vector3 averageNormal = wallNormalSum.Normal;
 
@@ -99,7 +103,7 @@ public class AirborneState : BaseState
                     targetVelocity += wishDir * Manager.WallJumpInputBoost;
                 }
             }
-            else if ( !Manager.HasDoubleJumped )
+            else if ( !Manager.HasDoubleJumped && Manager.Stamina.TryConsume( 1f ) )
             {
                 targetVelocity.z = Manager.AirJumpForce;
                 Manager.HasDoubleJumped = true;
@@ -113,7 +117,7 @@ public class AirborneState : BaseState
         // --- transitions ---
 
         // dash
-        if ( Input.Pressed( "run" ) && !Manager.HasAirDashed && !Input.AnalogMove.IsNearlyZero() )
+        if ( Input.Pressed( "run" ) && !Manager.HasAirDashed && !Input.AnalogMove.IsNearlyZero() && Manager.Stamina.TryConsume( 1f ) )
         {
             return new DashState( Manager );
         }
