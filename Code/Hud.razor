@@ -59,6 +59,11 @@
                 <span class="value">@PlayerTracker.HasWallJumped</span>
             </div>
 
+            <div class="row">
+                <span class="label">Stamina:</span>
+                <span class="value">@(MathF.Round(PlayerTracker.Stamina.Charges, 2))</span>
+            </div>
+
         }
     </div>
 </root>
