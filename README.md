@@ -1,7 +1,7 @@
 # Deadlock Movement System
 > This project aims to replace the standard Facepunch PlayerController with a from-scratch C# implementation to mimic the momentum-based mechanics found in *Deadlock*.
 
-## Current Status: Implementing Core Mechanics
+## Current Status: Polishing Core Mechanics
 - [x] CharacterController Integration
 - [x] Camera-relative WishDir Projection
 - [x] Air Strafe Physics
@@ -16,7 +16,7 @@
 - [ ] (Bonus) High / Low Mantle
 - [ ] (Environmental) Ziplines
 - [ ] (Environmental) Vents
-- [ ] Stamina System
+- [x] Stamina System
 
 
 
@@ -37,6 +37,7 @@ s&box's `CharacterController` handles collision detection, ground detection, and
 | Slope-aware slide physics | |
 | Double jump with directional impulse | |
 | Mantle detection (5-ray forward sweep + downward ledge scan) | |
+| Stamina resource system (`StaminaComponent`) with time-based regen | |
 
 
 ## Calibration Backlog
