@@ -11,8 +11,9 @@
 - [x] Wall Bouncing
 - [x] Sliding on slopes (min. slide-speed variation)
 - [x] Edge Boosting
-- [ ] Mantling
-- [ ] (Bonus) Mantle Sliding
+- [x] Mantling
+- [x] (Bonus) Mantle Sliding
+- [ ] (Bonus) High / Low Mantle
 - [ ] (Environmental) Ziplines
 - [ ] (Environmental) Vents
 - [ ] Stamina System
@@ -35,11 +36,14 @@ s&box's `CharacterController` handles collision detection, ground detection, and
 | Dash, wall jump, edge boost, coyote timer | |
 | Slope-aware slide physics | |
 | Double jump with directional impulse | |
+| Mantle detection (5-ray forward sweep + downward ledge scan) | |
 
 
 ## Calibration Backlog
 > Physics values to measure and match against the Deadlock reference (+ other small features/tweaks).
 - [x] input-based directional impulse on double jumps
+- [x] mantle exit impulse: **177 u/s** (standard) / **512 u/s** (mantle slide)
+- [ ] slope sliding needs refactoring; higher initial impulse and a speed cap I think
 
 ## Movement Glossary
 
@@ -47,3 +51,4 @@ Terms used throughout this codebase and devlog which might not be obvious.
 
 - **Edge Boost**: (while airborne) Sliding along a wall and jumping at the corner edge. The diagonal wall normal at the corner adds a forward component to the kick, boosting the player's momentum.
 - **Wall Coyote Time**: A short window after leaving a wall surface where the wall jump input is still accepted.
+- **Mantle Slide**: Triggered on mantle exit by holding crouch and directing input toward the wall. Injects an explicit 512 u/s forward impulse into SlideState rather than the standard 177 u/s exit boost.
