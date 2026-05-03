@@ -66,6 +66,22 @@
 
         }
     </div>
+
+    @if (PlayerTracker != null)
+    {
+        bool flashing = (float)PlayerTracker.Stamina.TimeSinceLastFailedConsume < 0.4f;
+        int fullPips = (int)MathF.Floor( PlayerTracker.Stamina.Charges );
+        bool dashWindow = (PlayerTracker.CurrentState as DashState)?.IsInDashJumpWindow ?? false;
+
+        <div class="crosshair-container">
+            <div class="crosshair-dot"></div>
+            <div class="stamina-pips">
+                <div class="pip @(dashWindow ? "pip-dash-window" : fullPips >= 1 ? "pip-full" : flashing ? "pip-flash" : "pip-empty")"></div>
+                <div class="pip @(dashWindow ? "pip-dash-window" : fullPips >= 2 ? "pip-full" : flashing ? "pip-flash" : "pip-empty")"></div>
+                <div class="pip @(dashWindow ? "pip-dash-window" : fullPips >= 3 ? "pip-full" : flashing ? "pip-flash" : "pip-empty")"></div>
+            </div>
+        </div>
+    }
 </root>
 
 @code
@@ -173,6 +189,52 @@
     .coyote-active {
     color: #ffcc00;
     font-weight: bold;
+    }
+
+    .crosshair-container {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -20px;
+        margin-top: -6px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .crosshair-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 3px;
+        background-color: rgba(255, 255, 255, 0.85);
+        margin-bottom: 6px;
+    }
+
+    .stamina-pips {
+        flex-direction: row;
+    }
+
+    .pip {
+        width: 9px;
+        height: 9px;
+        border-radius: 5px;
+        margin: 2px;
+    }
+
+    .pip-full {
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .pip-empty {
+        background-color: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+    }
+
+    .pip-flash {
+        background-color: rgba(255, 70, 70, 0.95);
+    }
+
+    .pip-dash-window {
+        background-color: rgba(80, 180, 255, 0.95);
     }
 
 </style>

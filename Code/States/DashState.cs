@@ -12,6 +12,12 @@ public class DashState : BaseState
     private float DashDuration;
     private bool DashJumpLockedOut = false;
 
+    // true during the valid dash jump window - read by the HUD to stamina bar flash blue
+    public bool IsInDashJumpWindow => Manager.Controller.IsOnGround
+        && !DashJumpLockedOut
+        && (float)TimeSinceEntered > DashDuration * Manager.DashJumpWindow
+        && (float)TimeSinceEntered < DashDuration;
+
     public DashState( Movement manager ) : base( manager ) { }
 
     public override void Enter()

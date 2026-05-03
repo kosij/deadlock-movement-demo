@@ -25,10 +25,17 @@ public class StaminaComponent : Component
         Charges = Math.Clamp( Charges + RegenRate * Time.Delta, 0f, MaxCharges );
     }
 
+    // stamped when TryConsume fails - read by the HUD to trigger the flash feedback
+    public TimeSince TimeSinceLastFailedConsume;
+
     // checks and deducts cost. returns false without deducting if insufficient.
     public bool TryConsume( float cost )
     {
-        if ( Charges < cost ) return false;
+        if ( Charges < cost )
+        {
+            TimeSinceLastFailedConsume = 0;
+            return false;
+        }
         Charges -= cost;
         return true;
     }
