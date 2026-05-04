@@ -1,5 +1,28 @@
 # DevLog
 
+## 11 [May 2, 2026] - Feature: Stamina System & UI
+
+<br><br>
+
+**Features Implemented:**
+*   **StaminaComponent:** A standalone component with a `TryConsume(float cost)` API and time-based regen (`0.25` charges/s, ~4s per charge). Separated from `Movement.cs` so the HUD and future ability systems can reference it without coupling to the movement stack.
+*   **Stamina-Gated Actions:** All movement actions now require available charges: dashes cost `1.0`, double jumps cost `1.0`, the dash jump costs an additional `1.0` on top of the dash (2.0 total), and non-first wall jumps cost `0.5`. The first wall jump remains free. Per-airtime flags (`HasAirDashed`, `HasDoubleJumped`) are unchanged - stamina is a second, independent gate.
+*   **Stamina UI & Crosshair:** Added a centered crosshair dot with 3 stamina pips below it. Pips drain as charges are spent. Pips flash red for `0.4s` when a gated action fails. Pips flash blue during the valid dash-jump window using a pattern match on `CurrentState as DashState`.
+
+<br><br>
+
+**Key Learnings & Takeaways:**
+*   **Stamina as a Design Tool:** The reason Deadlock uses a stamina system isn't to limit fun - it's to force decisiveness. Every action has a cost and you have to commit to what you're spending charges on.
+*   **Component Separation:** Stamina as a standalone component means any future system - abilities, items, UI - can reference it directly without coupling to the movement stack. `TryConsume()` is a clean, reusable gate, and the HUD references the component directly without going through the movement manager.
+
+<br><br>
+
+> **Media:**
+
+
+
+---
+
 ## 10 [April 29, 2026] - Feature: Mantling & Mantle Slide
 
 <br><br>
