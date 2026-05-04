@@ -1,5 +1,29 @@
 # DevLog
 
+## 10 [April 29, 2026] - Feature: Mantling & Mantle Slide
+
+<br><br>
+
+**Features Implemented:**
+*   **Two-Phase Ledge Detection:** Implemented `TryGetMantleTarget()` using a 5-ray forward sweep to find the nearest wall face, then a downward scan from above the wall to find the true top surface. This handles thin rails, high ledges, and fences that a standard chest/head height raycast would miss.
+*   **Arced MantleState:** The climb uses independent sine curves for Z (EaseOutSine - pulls up fast) and XY (EaseInSine - pushes forward late) rather than a single linear lerp. This creates a "pull up, push over" arc that prevents the player capsule from clipping through the wall corner.
+*   **Explicit Mantle Slide:** Testing Deadlock revealed the mantle slide injects exactly `512 u/s` on exit rather than carrying whatever velocity the player had into the wall. The standard exit is `177 u/s`. Triggered by holding crouch and directing input toward the wall on mantle completion.
+*   **Auto-Mantle from Ground:** Implemented via `Input.Down("jump") && !Input.Pressed("jump")` - if jump is held from a previous action and the player walks into a valid obstacle, they auto-mantle without a fresh jump press.
+
+<br><br>
+
+**Key Learnings & Takeaways:**
+*   **Two-Phase Detection vs Chest/Head Raycasts:** The common approach fires rays at chest height and head height to detect if an obstacle can be vaulted. The two-phase method (find wall face, then find its top) is less common but handles a wider range of geometry - particularly thin obstacles like rails and ledges where the head ray would pass clean through.
+*   **Mantle Slide is Coded, Not Emergent:** I initially assumed the mantle slide was emergent behaviour - the slide state picking up whatever exit velocity the mantle carried, but testing Deadlock proved otherwise. The `512 u/s` value appears consistently regardless of entry speed, which means it's an explicit injection at the transition point, not physics preserving momentum.
+
+<br><br>
+
+> **Media:**
+
+
+
+---
+
 ## 9 [April 25, 2026] - Feature: Edge Boosting & Telemetry HUD
 
 <br><br>
