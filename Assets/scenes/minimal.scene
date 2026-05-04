@@ -933,7 +933,7 @@
           ],
           "Children": [
             {
-              "__guid": "4b036490-2489-4532-9e86-7aba7238e0f8",
+              "__guid": "4cbd38ec-cd85-4ab0-aa12-dcc9296cf731",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - eyebrows",
@@ -950,7 +950,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "180e3be4-fd00-4b9b-9987-4406cade587f",
+                  "__guid": "46fdde81-c808-4305-9e0a-956c76c96921",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -1002,7 +1002,7 @@
               "Children": []
             },
             {
-              "__guid": "d5d1bdcc-2616-4d2e-9c62-eef37031b335",
+              "__guid": "d21588f7-b4a5-48f2-92b8-9048c7da9be9",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - hair_long_dreadlocks",
@@ -1019,7 +1019,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "fc8386ff-4e90-470d-b4c7-ff7b03a8dc41",
+                  "__guid": "8aef5fa0-0622-4fae-9759-05bbdd4f198e",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -1071,7 +1071,7 @@
               "Children": []
             },
             {
-              "__guid": "1378f194-96e4-4d7e-ba72-3dd3bb8255c2",
+              "__guid": "bc18f0b9-3898-49fd-92c8-3c2c2f9284f2",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - football_tshirt",
@@ -1088,7 +1088,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "92243a46-6902-43fe-b9b1-b245b183b19e",
+                  "__guid": "1fa4f908-be82-49ff-81ab-f573eb54a8f0",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -1140,7 +1140,7 @@
               "Children": []
             },
             {
-              "__guid": "ef7df022-b792-4bd4-92b4-18ae10893c9d",
+              "__guid": "f38fbf54-ec9e-4b3f-b3dc-96ec9a6d42af",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - slippers",
@@ -1157,7 +1157,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "5d5294cf-0a07-4659-8c17-ce6c858dc79d",
+                  "__guid": "68afb5b2-1c6b-4269-8b5f-02d95690e03d",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -1209,7 +1209,7 @@
               "Children": []
             },
             {
-              "__guid": "7a291b3a-505b-4d33-b786-9c95a8cf6fb1",
+              "__guid": "7be2b83c-f4c5-4f37-b856-d3f47c4ef2bc",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - boxing_shorts_red",
@@ -1226,7 +1226,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "ad704380-3c94-4fa8-aad6-8a5d28c651d0",
+                  "__guid": "e4d4356a-5bc9-4542-9080-92e2f530c243",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -1538,13 +1538,13 @@
           "$blob": "a9bd60e0-7d9a-4db2-bd07-965f215ce664"
         }
       },
-      "Sandbox.MovieMaker.MovieRecorderSystem": {
-        "DisableClientRecording": false
-      },
       "Sandbox.SelectionSetsSystem": {
         "Data": {
           "SelectionSets": []
         }
+      },
+      "Sandbox.MovieMaker.MovieRecorderSystem": {
+        "DisableClientRecording": false
       }
     }
   },
