@@ -14,7 +14,9 @@
 | Crouch / Slide | C |
 | Mantle | Hold Space near a ledge |
 
-## Current Status: Polishing Core Mechanics
+## Current Status: Presentation Pass
+
+**Core Mechanics** (complete)
 - [x] CharacterController Integration
 - [x] Camera-relative WishDir Projection
 - [x] Air Strafe Physics
@@ -26,11 +28,18 @@
 - [x] Edge Boosting
 - [x] Mantling
 - [x] (Bonus) Mantle Sliding
+- [x] Stamina System
+
+**Presentation** (in progress)
+- [ ] Camera polish (FOV push on dash, shake on mantle/landing/wall impact)
+- [ ] Animations (dash, slide, wall slide, wall jump, mantle)
+- [ ] VFX (landing puffs, dash streaks, wall impact particles)
+- [ ] Demo arena / movement course
+
+**Deferred**
 - [ ] (Bonus) High / Low Mantle
 - [ ] (Environmental) Ziplines
 - [ ] (Environmental) Vents
-- [x] Stamina System
-
 
 
 ## Technical Goal
