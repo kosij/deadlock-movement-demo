@@ -21,12 +21,7 @@ public class SlideState : BaseState
 
     public override BaseState Update()
     {
-        // local vars and camera
-        Vector3 wishDir = Input.AnalogMove;
-        wishDir *= Manager.Scene.Camera.WorldRotation;
-        wishDir.z = 0;
-        // normalise vector
-        wishDir = wishDir.Normal;
+        Vector3 wishDir = GetWishDir();
         Vector3 targetVelocity = Manager.Controller.Velocity;
 
         // calculate slide threshold based on slope direction

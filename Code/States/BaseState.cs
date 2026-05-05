@@ -16,6 +16,16 @@ public abstract class BaseState
 
     public Vector3 WishDir { get; protected set; }
 
+    // projects input onto the horizontal plane relative to the camera.
+    // shared by all states - keeps the 4-line boilerplate out of every Update().
+    protected Vector3 GetWishDir()
+    {
+        Vector3 dir = Input.AnalogMove;
+        dir *= Manager.Scene.Camera.WorldRotation;
+        dir.z = 0;
+        return dir.Normal;
+    }
+
     public virtual void Enter() { }
 
     public abstract BaseState Update();

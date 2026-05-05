@@ -47,10 +47,7 @@ public class MantleState : BaseState
         if ( t >= 1f )
         {
             // get local wish direction
-            Vector3 wishDir = Input.AnalogMove;
-            wishDir *= Manager.Scene.Camera.WorldRotation;
-            wishDir.z = 0;
-            wishDir = wishDir.Normal;
+            Vector3 wishDir = GetWishDir();
 
             Vector3 mantleForward = ( TargetPos - StartPos ).WithZ( 0 ).Normal;
 

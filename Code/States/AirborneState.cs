@@ -12,14 +12,8 @@ public class AirborneState : BaseState
 
     public override BaseState Update()
     {
-        // local vars and camera
-        Vector3 wishDir = Input.AnalogMove;
-        wishDir *= Manager.Scene.Camera.WorldRotation;
-        wishDir.z = 0;
+        Vector3 wishDir = GetWishDir();
 
-        // normalise vector
-        wishDir = wishDir.Normal;
-        
         Vector3 targetVelocity = Manager.Controller.Velocity;
 
 
