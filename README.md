@@ -1,6 +1,19 @@
 # Deadlock Movement System
 > This project aims to replace the standard Facepunch PlayerController with a from-scratch C# implementation to mimic the momentum-based mechanics found in *Deadlock*.
 
+## Demo
+> Gameplay reel and playable build coming after I add animations and VFX.
+
+## Controls
+| Action | Key |
+|---|---|
+| Move | WASD |
+| Camera | Mouse |
+| Jump / Double Jump | Space |
+| Dash | Left Shift |
+| Crouch / Slide | C |
+| Mantle | Hold Space near a ledge |
+
 ## Current Status: Polishing Core Mechanics
 - [x] CharacterController Integration
 - [x] Camera-relative WishDir Projection
@@ -22,6 +35,22 @@
 
 ## Technical Goal
 > To implement a momentum-conservative state machine that handles stamina-gated movement actions while maintaining the classic Source "snappiness" through custom WishDir projection.
+
+## Architecture
+
+`Movement.cs` acts as the state manager and global property container. Each fixed update it calls `CurrentState.Update()`, which returns either `null` (stay) or a new state instance (transition). All velocity math lives inside the states.
+
+| File | Role |
+|---|---|
+| `Movement.cs` | State machine manager. Holds all tunable properties, calls `CharacterController.Move()` |
+| `BaseState.cs` | Abstract base. Provides `GetWishDir()` and the `Enter()` / `Update()` / `Exit()` lifecycle |
+| `StaminaComponent.cs` | Standalone stamina resource with `TryConsume()`. Referenced by states and HUD independently |
+| `PlayerCamera.cs` | Third-person tracking with sphere-cast wall collision |
+| `Hud.razor` | Telemetry overlay and stamina pip UI |
+
+**States:** `GroundedState` - `AirborneState` - `DashState` - `SlideState` - `CrouchState` - `WallSlideState` - `MantleState`
+
+**Start reading:** `Movement.cs` -> `BaseState.cs` -> `AirborneState.cs`
 
 ## What I Built vs What the Engine Provides
 
