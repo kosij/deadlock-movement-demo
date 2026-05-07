@@ -64,14 +64,12 @@ public class DashState : BaseState
         if ( Input.Pressed( "jump" ) && TimeSinceEntered < DashDuration * Manager.DashJumpWindow )
         {
             DashJumpLockedOut = true;
-            Log.Info( $"Dash Jump: TOO EARLY ({TimeSinceEntered:F3}s / window opens at {DashDuration * Manager.DashJumpWindow:F3}s)" );
         }
         // if successful dash-jump timing:
         if ( Manager.Controller.IsOnGround && !DashJumpLockedOut && TimeSinceEntered > DashDuration * Manager.DashJumpWindow )
         {
             if ( Input.Pressed( "jump" ) && Manager.Stamina.TryConsume( 1f ) )
             {
-                Log.Info( "DASH SUCCESSFUL" );
                 Manager.Controller.Velocity = DashVelocity.WithZ( 0 ) * 1.2f; // tuned to match reference absolute velocity
                 Manager.Controller.Punch( Vector3.Up * Manager.DashJumpForce );
                 return new AirborneState( Manager );
