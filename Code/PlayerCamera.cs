@@ -5,9 +5,15 @@ public sealed class PlayerCamera : Component
 {
     [Property] public GameObject Target { get; set; }
     [Property] public float Distance { get; set; } = 250f;
-    [Property] public float TargetHeight { get; set; } = 64f;
+    [Property] public float TargetHeight { get; set; } = 1.05f; // 1.0 = head height
+    [Property] public float ShoulderOffset { get; set; } = 40f;  // lateral right-side offset
+    [Property] public float FollowSpeed { get; set; } = 20f;     // tight follow (everything except ground dash)
+    [Property] public float DashFollowSpeed { get; set; } = 5f;  // lagged follow during ground dash
 
     private Angles EyeAngles;
+    private Vector3 SmoothedPivot;  // lerps toward character position - rotation offset applied on top
+    private bool Initialized;
+    private Movement MovementRef;
 
     protected override void OnUpdate()
     {
@@ -22,19 +28,32 @@ public sealed class PlayerCamera : Component
         // apply rotation to scene camera
         Scene.Camera.WorldRotation = EyeAngles.ToRotation();
 
-        // set the camera offset from the player
-        CharacterController controller = Target.Components.Get<CharacterController>();
-        float currentTargetHeight = controller != null ? (controller.Height * 0.9f) : 64f;
-        Vector3 centerPosition = Target.WorldPosition + Vector3.Up * currentTargetHeight;
-        Vector3 offset = Scene.Camera.WorldRotation.Backward * Distance;
+    // --- position and follow ---
 
-        // trace to prevent camera clipping through walls
-        var tr = Scene.Trace.Ray( centerPosition, centerPosition + offset )
+        // set the camera offset from the player
+        MovementRef ??= Target.Components.Get<Movement>();
+        CharacterController controller = Target.Components.Get<CharacterController>();
+        float currentTargetHeight = controller != null ? (controller.Height * TargetHeight) : 64f;
+        Vector3 centerPosition = Target.WorldPosition + Vector3.Up * currentTargetHeight;
+
+        // detect ground dash for slower follow speed
+        // lerp the PIVOT (character follow), not the final camera position.
+        // this means mouse rotation is always instant - only character movement lags.
+        bool isGroundDash = MovementRef?.CurrentState is DashState && MovementRef?.Controller.IsOnGround == true;
+        float speed = isGroundDash ? DashFollowSpeed : FollowSpeed;
+
+        if ( !Initialized ) { SmoothedPivot = centerPosition; Initialized = true; }
+        SmoothedPivot = Vector3.Lerp( SmoothedPivot, centerPosition, speed * Time.Delta );
+
+        // apply rotational offset instantly from the smoothed pivot
+        Vector3 offset = Scene.Camera.WorldRotation.Backward * Distance
+                       + Scene.Camera.WorldRotation.Right * ShoulderOffset;
+
+        var tr = Scene.Trace.Ray( SmoothedPivot, SmoothedPivot + offset )
             .IgnoreGameObjectHierarchy( Target )
-            .Radius( 8f ) // small sphere so the camera doesn't touch the wall and clip
+            .Radius( 8f )
             .Run();
 
-        // apply position to scene camera (move it inward if it hit a wall)
-        Scene.Camera.WorldPosition = tr.Hit ? tr.EndPosition : centerPosition + offset;
+        Scene.Camera.WorldPosition = tr.Hit ? tr.EndPosition : SmoothedPivot + offset;
     }
 }
