@@ -9,6 +9,7 @@ public sealed class PlayerCamera : Component
     [Property] public float ShoulderOffset { get; set; } = 40f;  // lateral right-side offset
     [Property] public float FollowSpeed { get; set; } = 20f;     // tight follow (everything except ground dash)
     [Property] public float DashFollowSpeed { get; set; } = 5f;  // lagged follow during ground dash
+    [Property] public float FieldOfView { get; set; } = 90f;
 
     private Angles EyeAngles;
     private Vector3 SmoothedPivot;  // lerps toward character position - rotation offset applied on top
@@ -27,6 +28,9 @@ public sealed class PlayerCamera : Component
 
         // apply rotation to scene camera
         Scene.Camera.WorldRotation = EyeAngles.ToRotation();
+
+        // set the camera FOV
+        Scene.Camera.FieldOfView = FieldOfView;
 
     // --- position and follow ---
 
