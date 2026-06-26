@@ -108,27 +108,27 @@ public sealed class Movement : Component
         Animator.WithWishVelocity( CurrentState.WishDir );
         Animator.IsGrounded = Controller.IsOnGround;
 
-        if ( CurrentState is SlideState ) 
+        // 0 = none, 1 = ledge_grab, 2 = roll, 3 = slide
+        int specialState = 0; 
+        if ( CurrentState is MantleState ) specialState = 1;
+        else if ( CurrentState is DashState ) specialState = 2; // roll makes an awesome dash!
+        else if ( CurrentState is SlideState ) specialState = 3;
+
+        var renderer = Components.Get<SkinnedModelRenderer>( FindMode.EverythingInSelfAndDescendants );
+        if ( renderer != null )
         {
-            Animator.DuckLevel = 1f;
-            Animator.IsSitting = true;
+            renderer.Set( "special_movement_states", specialState );
         }
-        else if ( CurrentState is CrouchState )
+
+        // still need ducking for actual crouch and wall slide
+        if ( CurrentState is CrouchState || CurrentState is WallSlideState )
         {
+            if ( CurrentState is WallSlideState ) Animator.IsGrounded = true; // wall slide hack
             Animator.DuckLevel = 1f;
-            Animator.IsSitting = false;
-        }
-        else if ( CurrentState is WallSlideState )
-        {
-            // pretending we are grounded so we can use the crouch animation for wall slide
-            Animator.IsGrounded = true;
-            Animator.DuckLevel = 1f;
-            Animator.IsSitting = false;
         }
         else 
         {
             Animator.DuckLevel = 0f;
-            Animator.IsSitting = false;
         }
     }
 
