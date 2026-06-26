@@ -759,7 +759,7 @@
           "AirSpeed": 30,
           "CrouchSpeed": 187,
           "DashJumpForce": 406,
-          "DashJumpWindow": 0.7,
+          "DashJumpWindow": 0.6,
           "Gravity": 800,
           "GroundAcceleration": 4,
           "GroundDashDuration": 0.3,
@@ -905,7 +905,7 @@
               "__enabled": true,
               "Flags": 0,
               "AnimationGraph": "animation/citizen/customcitizenanimgraph.vanmgrph",
-              "BodyGroups": 341,
+              "BodyGroups": 321,
               "BoneMergeTarget": null,
               "CreateAttachments": false,
               "CreateBoneObjects": false,
@@ -947,7 +947,7 @@
           ],
           "Children": [
             {
-              "__guid": "2939023b-405f-4820-992e-f76d89b6adec",
+              "__guid": "d35ad3e0-1ab2-4970-af39-13f18721dd90",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - eyebrows",
@@ -964,7 +964,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "ae871929-7b08-4caa-8aff-8b2bf6d71ec3",
+                  "__guid": "b82507b3-ce47-4269-9e03-9636638ad509",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -1016,7 +1016,7 @@
               "Children": []
             },
             {
-              "__guid": "e791db95-664c-42a4-b4fa-5e9644850dcf",
+              "__guid": "febc72dc-19c3-4a56-8190-9efac75f16a6",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - hair_long_dreadlocks",
@@ -1033,7 +1033,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "4fb9d1d3-2295-44ae-b247-3983184b6618",
+                  "__guid": "d643d71f-0882-40d9-a2f3-2ee96ddce660",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -1085,7 +1085,7 @@
               "Children": []
             },
             {
-              "__guid": "a0b71237-5cbb-43d3-8132-94e2933ab6e9",
+              "__guid": "65ec8d39-9123-4e18-b9b6-30ebbb44d96c",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - football_tshirt",
@@ -1102,7 +1102,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "75ab8ec7-2f8c-4a39-a2f0-aa304a6f76df",
+                  "__guid": "575f73b4-1b7f-492b-aab9-ed429bc5611f",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -1154,7 +1154,7 @@
               "Children": []
             },
             {
-              "__guid": "2deab990-8461-479d-825c-8e0e4d8ab09a",
+              "__guid": "be5102c7-1724-4a98-8e38-6c60865e777e",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - slippers",
@@ -1171,7 +1171,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "4992840d-39a3-4166-bbcc-e6b0e6b778bf",
+                  "__guid": "c68ab4e2-af37-4214-9cbf-48f986b9c08d",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,
@@ -1223,7 +1223,7 @@
               "Children": []
             },
             {
-              "__guid": "8415c4a7-d569-4b86-ac8a-e3fc6515dcdf",
+              "__guid": "1cb64317-9c71-4709-b183-a5e285358689",
               "__version": 2,
               "Flags": 0,
               "Name": "Clothing - boxing_shorts_red",
@@ -1240,7 +1240,7 @@
               "Components": [
                 {
                   "__type": "Sandbox.SkinnedModelRenderer",
-                  "__guid": "50b2948e-84ba-4b44-b399-a85fa83197a7",
+                  "__guid": "79ac212d-b364-4cb4-b707-3b86d90dcc9d",
                   "__enabled": true,
                   "Flags": 0,
                   "AnimationGraph": null,

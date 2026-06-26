@@ -49226,7 +49226,7 @@
 									}
 									m_param = 
 									{
-										m_id = 61537621
+										m_id = 628078288
 									}
 								}
 							},
@@ -89690,6 +89690,20 @@
 				m_fDefaultValue = 0.0
 				m_fMinValue = -20.0
 				m_fMaxValue = 20.0
+			},
+			{
+				_class = "CFloatAnimParameter"
+				m_name = "dash_speed_scale"
+				m_id = 
+				{
+					m_id = 628078288
+				}
+				m_previewButton = "ANIMPARAM_BUTTON_NONE"
+				m_bUseMostRecentValue = false
+				m_bAutoReset = false
+				m_fDefaultValue = 1.0
+				m_fMinValue = 0.0
+				m_fMaxValue = 10.0
 			},
 		]
 	}

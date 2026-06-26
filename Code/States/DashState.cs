@@ -9,7 +9,7 @@ public class DashState : BaseState
 {
     private TimeSince TimeSinceEntered;
     private Vector3 DashVelocity;
-    private float DashDuration;
+    public float DashDuration { get; private set; }
     private bool DashJumpLockedOut = false;
 
     // true during the valid dash jump window - read by the HUD to stamina bar flash blue

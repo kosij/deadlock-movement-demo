@@ -118,6 +118,12 @@ public sealed class Movement : Component
         if ( renderer != null )
         {
             renderer.Set( "special_movement_states", specialState );
+
+            if ( CurrentState is DashState dash )
+            {
+                // Sync animation playback speed with our physics duration (e.g. 1.0s / 0.3s = 3.33x speed)
+                renderer.Set( "dash_speed_scale", 1.0f / dash.DashDuration );
+            }
         }
 
         // still need ducking for actual crouch and wall slide
