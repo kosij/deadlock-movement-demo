@@ -52,10 +52,14 @@ public sealed class Movement : Component
     [Property] public float MantleExitImpulse { get; set; } = 177f;  // u/s  | forward boost on normal mantle exit
     [Property] public float MantleSlideImpulse { get; set; } = 512f; // u/s  | forward boost when triggering a mantle slide
 
+    // --- Feel ---
+    [Property] public float JumpBufferWindow { get; set; } = 0.15f;  // s    | window to register a jump input before landing
+
     public bool HasAirDashed { get; set; } = false;
     public bool HasDoubleJumped { get; set; } = false;
     public bool HasWallJumped { get; set; } = false;
     public TimeSince TimeSinceLeftWall;
+    public TimeSince TimeSinceJumpPressed;  // stamped on any airborne jump press - read by GroundedState for landing buffer
 
 
     [RequireComponent] public CitizenAnimationHelper Animator { get; set; }

@@ -22,6 +22,14 @@ public class GroundedState : BaseState
         Vector3 wishDir = GetWishDir();
         Vector3 targetVelocity = Manager.Controller.Velocity;
 
+        // jump buffer
+        if ( (float)Manager.TimeSinceJumpPressed < Manager.JumpBufferWindow )
+        {
+            Manager.TimeSinceJumpPressed = float.MaxValue; // consume buffer so it doesn't fire twice
+            Manager.Controller.Punch( Vector3.Up * Manager.JumpForce );
+            return new AirborneState( Manager );
+        }
+
         // apply friciton
         targetVelocity = Vector3.Lerp( targetVelocity, Vector3.Zero, Manager.GroundFriction * Time.Delta );
 

@@ -45,6 +45,7 @@ public class AirborneState : BaseState
         // wall-jump or double jump
         if ( Input.Pressed( "jump" ) )
         {
+            Manager.TimeSinceJumpPressed = 0;
             if ( Manager.TimeSinceLeftWall < Manager.WallCoyoteTime )
             {
                 // fire raycast starburst to find wall geometry near player's current position during wall coyote time
