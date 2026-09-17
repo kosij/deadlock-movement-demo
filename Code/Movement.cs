@@ -57,10 +57,9 @@ public sealed class Movement : Component
 
     public bool HasAirDashed { get; set; } = false;
     public bool HasDoubleJumped { get; set; } = false;
-    public bool HasWallJumped { get; set; } = false;
-    public TimeSince TimeSinceLeftWall;
-    public TimeSince TimeSinceJumpPressed;  // stamped on any airborne jump press - read by GroundedState for landing buffer
-
+    [Sync] public bool HasWallJumped { get; set; } = false;
+    public TimeSince TimeSinceLeftWall { get; set; } = 0f;
+    public TimeSince TimeSinceJumpPressed { get; set; } = 0f;
 
     [RequireComponent] public CitizenAnimationHelper Animator { get; set; }
     [RequireComponent] public CharacterController Controller { get; set; }
@@ -95,8 +94,8 @@ public sealed class Movement : Component
     {
         if ( Animator == null ) return;
 
-        // freeze the legs animation during dash and slide
-        if ( CurrentState is SlideState || CurrentState is DashState )
+        // freeze the legs animation during slide
+        if ( CurrentState is SlideState )
         {
             Animator.WithVelocity( Vector3.Zero );
         }
@@ -108,11 +107,12 @@ public sealed class Movement : Component
         Animator.WithWishVelocity( CurrentState.WishDir );
         Animator.IsGrounded = Controller.IsOnGround;
 
-        // 0 = none, 1 = ledge_grab, 2 = roll, 3 = slide
+        // 0 = none, 1 = ledge_grab, 2 = roll, 3 = slide, 4 = wall_slide
         int specialState = 0; 
         if ( CurrentState is MantleState ) specialState = 1;
-        else if ( CurrentState is DashState ) specialState = 2; // roll makes an awesome dash!
+        else if ( CurrentState is DashState ) specialState = 2;
         else if ( CurrentState is SlideState ) specialState = 3;
+        else if ( CurrentState is WallSlideState ) specialState = 4;
 
         var renderer = Components.Get<SkinnedModelRenderer>( FindMode.EverythingInSelfAndDescendants );
         if ( renderer != null )
@@ -121,8 +121,21 @@ public sealed class Movement : Component
 
             if ( CurrentState is DashState dash )
             {
-                // Sync animation playback speed with our physics duration (e.g. 1.0s / 0.3s = 3.33x speed)
+                // sync animation playback speed with our physics duration (e.g. 1.0s / 0.3s = 3.33x speed)
                 renderer.Set( "dash_speed_scale", 1.0f / dash.DashDuration );
+
+                // calculate local dash direction for the 2D Blend Space
+                Vector3 localDashDir = WorldRotation.Inverse * dash.DashDir;
+                renderer.Set( "dash_x", -localDashDir.y ); // Right/Left axis (-Y : right)
+                renderer.Set( "dash_y", localDashDir.x );  // Forward/Backward axis (X : forward)
+            }
+            else if ( CurrentState is MantleState )
+            {
+                // LedgeGrab_PullUp_01 is natively 26 frames @ 30fps = 0.8333s
+                // speed_scale = native_duration / target_duration
+                const float LedgePullUpNativeDuration = 0.8333f;
+                renderer.Set( "mantle_speed_scale", LedgePullUpNativeDuration / MantleDuration );
+            
             }
         }
 

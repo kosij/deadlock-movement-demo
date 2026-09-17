@@ -1,0 +1,21 @@
+{
+  "publish": {
+    "Enabled": false,
+    "ProjectConfig": {
+      "Title": "Standing Dodge Forward",
+      "Type": "fbx",
+      "Org": "local",
+      "Ident": "standing_dodge_forward",
+      "Schema": 0,
+      "IncludeSourceFiles": false,
+      "Resources": null,
+      "PackageReferences": null,
+      "EditorReferences": null,
+      "Mounts": null,
+      "IsStandaloneOnly": false,
+      "Metadata": {
+        "SingleAssetSource": "animation/citizen/standing dodge forward.fbx"
+      }
+    }
+  }
+}

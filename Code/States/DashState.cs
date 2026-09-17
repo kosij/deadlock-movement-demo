@@ -10,6 +10,7 @@ public class DashState : BaseState
     private TimeSince TimeSinceEntered;
     private Vector3 DashVelocity;
     public float DashDuration { get; private set; }
+    public Vector3 DashDir { get; private set; }
     private bool DashJumpLockedOut = false;
 
     // true during the valid dash jump window - read by the HUD to stamina bar flash blue
@@ -30,6 +31,7 @@ public class DashState : BaseState
         dashDir *= Manager.Scene.Camera.WorldRotation;
         dashDir.z = 0;
         dashDir = dashDir.Normal;
+        DashDir = dashDir;
 
         // select speed based on if grounded or airborne
         float burstSpeed = Manager.Controller.IsOnGround ? Manager.GroundDashSpeed : Manager.AirDashSpeed;
