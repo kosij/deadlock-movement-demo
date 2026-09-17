@@ -1,5 +1,33 @@
 # DevLog
 
+## 12 [September 17, 2026] - Feature: Custom Character & Directional Dash Animations
+
+<br><br>
+
+**Features Implemented:**
+*   **Directional Dash Animations:** Replaced the single forward roll with four directional dodge animations. I pass the dash direction into a 2D blend space using `dash_x` and `dash_y`, and speed the animation up to match the actual dash duration.
+*   **More Movement Animations:** Added animation states for wall sliding and mantling. I also synced the mantle animation speed to the duration of the mantle so it doesn't carry on after the movement has finished.
+*   **Custom Character:** I wanted a more interesting character than the default Citizen, so I figured out how to rig and convert a custom model to the Human Citizen skeleton. I am temporarily using Rise from *Bomb Rush Cyberfunk*, downloaded from The Models Resource, because I like their proportions and art style and will be creating an original character model with a similar silhouette eventually for this project.
+*   **Rigging and Weight Painting:** The automatic weights initially failed, and even after getting them to work there were a lot of deformation problems across the model. I cleaned up the mesh and spent quite a while manually adjusting the weights until the body and large coat moved acceptably with the rig.
+*   **Custom AnimGraph:** Added the converter's `proportion_trick` to my existing animation graph. This lets the model use the Citizen animations without losing its original proportions.
+
+<br><br>
+
+**Key Learnings & Takeaways:**
+*   **The Rigging Took Longer Than the Conversion:** Once the model was rigged and weighted properly, converting it to the Citizen skeleton was quite straightforward. Most of the work was getting the bones into the right places and repeatedly fixing parts of the mesh that deformed badly.
+*   **The Model Has to Be Tested in Motion:** A pose can look fine in Blender but still fall apart when running, crouching, or twisting in-game. Testing the animations regularly made it much easier to tell which weighting problems actually mattered.
+*   **I Can Reuse This Process for the Final Character:** I now have a working skeleton, converter setup, ModelDoc, and animation graph to use as a reference. Making the original character will still take time, but I no longer have to figure out the whole integration pipeline at the same time.
+
+<br><br>
+
+> **Media:**
+
+
+> **Tools / Credits:** Character conversion used [CustomModel-2-Sbox](https://github.com/BobmacU/CustomModel-2-Sbox) by BobmacU, which is based on Noztik's [Source to S&box Playermodel Converter](https://github.com/Noztik/Source-to-Sbox-Playermodel-Converter).
+
+
+---
+
 ## 11 [May 2, 2026] - Feature: Stamina System & UI
 
 <br><br>
